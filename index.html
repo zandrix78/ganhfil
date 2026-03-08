@@ -1,0 +1,595 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GANHFIL | Estilo e Exclusividade</title>
+    
+    <!-- Importação de Fontes: Playfair Display (Títulos) e Montserrat (Corpo) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500&family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet">
+
+    <style>
+        /* --- Variáveis de Design (Paleta de Cores) --- */
+        :root {
+            --bg-color: #F9F8F4; /* Off-white/Beige suave */
+            --text-color: #333333; /* Preto suave para leitura */
+            --accent-color: #D4AF37; /* Dourado */
+            --white: #FFFFFF;
+            --black: #000000;
+            
+            --font-title: 'Playfair Display', serif;
+            --font-body: 'Montserrat', sans-serif;
+        }
+
+        /* --- Reset e Base --- */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: var(--font-body);
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.6;
+            overflow-x: hidden; /* Previne rolagem lateral no mobile */
+        }
+
+        h1, h2, h3 {
+            font-family: var(--font-title);
+            color: var(--black);
+            margin-bottom: 1rem;
+        }
+
+        a {
+            text-decoration: none;
+            transition: 0.3s ease;
+        }
+
+        img {
+            max-width: 100%;
+            display: block;
+        }
+
+        /* --- Componentes --- */
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 15px;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 12px 30px;
+            border: 1px solid var(--black);
+            background-color: transparent;
+            color: var(--black);
+            font-family: var(--font-body);
+            text-transform: uppercase;
+            font-size: 0.9rem;
+            letter-spacing: 1px;
+            cursor: pointer;
+            margin-top: 1rem;
+        }
+
+        .btn:hover {
+            background-color: var(--black);
+            color: var(--white);
+        }
+
+        .btn-primary {
+            background-color: var(--black);
+            color: var(--white);
+        }
+
+        .btn-primary:hover {
+            background-color: var(--accent-color);
+            border-color: var(--accent-color);
+        }
+
+        /* --- Header --- */
+        header {
+            padding: 20px 0;
+            text-align: center;
+            border-bottom: 1px solid #e0e0e0;
+        }
+
+        .logo {
+            font-family: var(--font-title);
+            font-size: 1.8rem;
+            font-weight: 700;
+            letter-spacing: 2px;
+            color: var(--black);
+        }
+
+        /* --- Hero Section --- */
+        .hero {
+            min-height: 80vh; /* Altura mínima flexível */
+            padding: 60px 0; /* Espaço para não colar nas bordas no mobile */
+            background-color: #333; /* Cor de fundo enquanto a imagem carrega */
+            background-position: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Fundo animado com partículas */
+        .hero .shapes {
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            overflow: hidden;
+        }
+        .hero .shapes div {
+            position: absolute;
+            display: block;
+            width: 20px; height: 20px;
+            background: rgba(255, 255, 255, 0.15);
+            border-radius: 50%;
+            bottom: -150px;
+            animation: animateShapes 25s linear infinite;
+        }
+        .hero .shapes div:nth-child(1) { left: 25%; width: 80px; height: 80px; animation-delay: 0s; }
+        .hero .shapes div:nth-child(2) { left: 10%; width: 20px; height: 20px; animation-delay: 2s; animation-duration: 12s; }
+        .hero .shapes div:nth-child(3) { left: 70%; width: 20px; height: 20px; animation-delay: 4s; }
+        .hero .shapes div:nth-child(4) { left: 40%; width: 60px; height: 60px; animation-delay: 0s; animation-duration: 18s; }
+        .hero .shapes div:nth-child(5) { left: 65%; width: 20px; height: 20px; animation-delay: 0s; }
+        .hero .shapes div:nth-child(6) { left: 85%; width: 110px; height: 110px; animation-delay: 1s; }
+
+        /* Animação de fundo suave (Ken Burns Effect) */
+        .hero {
+            animation: 
+                bgZoom 20s infinite alternate,
+                changeBg 28s infinite linear;
+        }
+        @keyframes bgZoom {
+            from { background-size: 110% auto; }
+            to { background-size: 120% auto; }
+        }
+        @keyframes changeBg {
+            0%   { background-image: url('https://images.unsplash.com/photo-1490481651871-ab68de25d43d?q=80&w=1920&auto=format&fit=crop'); }
+            25%  { background-image: url('https://images.unsplash.com/photo-1490481651871-ab68de25d43d?q=80&w=1920&auto=format&fit=crop'); }
+            30%  { background-image: url('https://images.unsplash.com/photo-1523381294911-8d3cead13475?q=80&w=1920&auto=format&fit=crop'); }
+            55%  { background-image: url('https://images.unsplash.com/photo-1523381294911-8d3cead13475?q=80&w=1920&auto=format&fit=crop'); }
+            60%  { background-image: url('https://images.unsplash.com/photo-1551488831-00ddcb6c6bd3?q=80&w=1920&auto=format&fit=crop'); }
+            85%  { background-image: url('https://images.unsplash.com/photo-1551488831-00ddcb6c6bd3?q=80&w=1920&auto=format&fit=crop'); }
+            90%  { background-image: url('https://images.unsplash.com/photo-1567401893414-76b7b1e5a7a5?q=80&w=1920&auto=format&fit=crop'); }
+            100% { background-image: url('https://images.unsplash.com/photo-1567401893414-76b7b1e5a7a5?q=80&w=1920&auto=format&fit=crop'); }
+        }
+
+        .hero::after {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.3); /* Máscara escura para legibilidade */
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            color: var(--white);
+            padding: 20px;
+        }
+        
+        /* Animação de entrada do texto Hero */
+        .hero-content {
+            animation: fadeInUp 1.5s ease-out;
+        }
+
+        .hero h1 {
+            color: var(--white);
+            font-size: 2rem; /* Fonte menor para mobile */
+            margin-bottom: 1.5rem;
+        }
+
+        /* Efeito de digitação */
+        #typing-text::after {
+            content: '|';
+            animation: blink 0.7s infinite;
+            font-weight: 300;
+        }
+        @keyframes blink {
+            50% { opacity: 0; }
+        }
+        
+        @keyframes animateShapes {
+            0% { transform: translateY(0) rotate(0deg); opacity: 1; }
+            100% { transform: translateY(-1000px) rotate(720deg); opacity: 0; }
+        }
+        
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* --- Sobre a Marca --- */
+        .about {
+            padding: 50px 0; /* Padding reduzido para mobile */
+            text-align: center;
+            /* background-color: var(--white); */
+        }
+
+        /* Fundo animado para seções brancas */
+        .about, .services, .contact, .shein-section {
+            background: linear-gradient(-45deg, #ffffff, #fdfcf9, #f7f7f7, #ffffff);
+            background-size: 400% 400%;
+            animation: gradientBG 25s ease infinite;
+        }
+
+        .about p {
+            max-width: 700px;
+            margin: 0 auto 20px;
+            font-size: 1.1rem;
+        }
+
+        /* --- Diferenciais --- */
+        .features {
+            background: linear-gradient(-45deg, #fff, #fdfbf7, #fff, #f5f5f5);
+            background-size: 400% 400%;
+            animation: gradientBG 15s ease infinite;
+            padding: 50px 0;
+        }
+        
+        @keyframes gradientBG {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 40px;
+            text-align: center;
+        }
+
+        .feature-item h3 {
+            color: var(--accent-color);
+            font-size: 1.3rem;
+        }
+
+        /* --- Elementos Gerais --- */
+        .section-title {
+            text-align: center;
+            font-size: 1.75rem; /* Título menor no mobile */
+            margin-bottom: 3rem;
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 50px;
+            height: 2px;
+            background-color: var(--accent-color);
+            margin: 10px auto 0;
+        }
+
+        /* --- Prova Social --- */
+        .testimonials {
+            padding: 50px 0;
+            background-color: var(--bg-color);
+            text-align: center;
+        }
+
+        .testimonial-card {
+            background: var(--white);
+            padding: 30px;
+            margin: 20px auto;
+            max-width: 600px;
+            border-left: 3px solid var(--accent-color);
+            font-style: italic;
+        }
+
+        /* --- Seção de Serviços --- */
+        .services {
+            padding: 50px 0;
+            /* background-color: var(--white); */
+        }
+        .services-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 30px;
+            margin-top: 3rem;
+        }
+        .service-card {
+            text-align: center;
+            padding: 40px 20px;
+            border: 1px solid #eee;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+        }
+        .service-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.07);
+        }
+        .service-card h3 {
+            font-size: 1.4rem;
+            color: var(--black);
+        }
+
+        /* --- Seção SHEIN --- */
+        .shein-section {
+            padding: 50px 0;
+            text-align: center;
+            border-top: 1px solid #eee;
+        }
+
+        /* Badge de Destaque */
+        .badge-offer {
+            background-color: #ff4757;
+            color: white;
+            font-size: 0.7rem;
+            padding: 5px 12px;
+            border-radius: 20px;
+            vertical-align: middle;
+            margin-left: 10px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-weight: bold;
+            box-shadow: 0 4px 15px rgba(255, 71, 87, 0.4);
+            animation: pulse-badge 2s infinite;
+            display: inline-block;
+        }
+
+        @keyframes pulse-badge {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+            100% { transform: scale(1); }
+        }
+
+        /* --- Seção de Contato --- */
+        .contact {
+            padding: 50px 0;
+            /* background: var(--white); */
+            text-align: center;
+        }
+        .contact h2 {
+            font-size: 2.2rem;
+        }
+        .contact p {
+            max-width: 600px;
+            margin: 0 auto 2rem;
+        }
+
+        /* --- Footer --- */
+        footer {
+            background-color: var(--black);
+            color: var(--white);
+            padding: 40px 0;
+            text-align: center;
+        }
+
+        footer p {
+            font-size: 0.9rem;
+            opacity: 0.8;
+        }
+
+        footer a {
+            color: var(--accent-color);
+        }
+
+        /* --- Media Queries (Desktop) --- */
+        @media (min-width: 768px) {
+            .hero h1 { font-size: 3.5rem; }
+            .section-title { font-size: 2.5rem; }
+            
+            .services-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+
+            .features-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+
+            /* Restaurar espaçamentos maiores no Desktop */
+            .about, 
+            .features, 
+            .services,
+            .shein-section, 
+            .contact, 
+            .testimonials {
+                padding: 80px 0;
+            }
+        }
+
+        /* --- Classe para Animação de Scroll (JS) --- */
+        .reveal {
+            opacity: 0;
+            transform: translateY(50px);
+            transition: all 1s ease;
+        }
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+<body>
+    
+        <!-- Header -->
+        <header>
+            <div class="container">
+                <div class="logo">GANHFIL</div>
+            </div>
+        </header>
+    
+        <!-- Hero Section -->
+        <section class="hero">
+            <div class="shapes">
+                <div></div><div></div><div></div><div></div><div></div><div></div>
+            </div>
+            <div class="hero-content">
+                <h1>GANHFIL: O Melhor da SHEIN <span id="typing-text"></span></h1>
+                <a href="https://www.instagram.com/ganhfil" target="_blank" class="btn btn-primary">Ver Achadinhos</a>
+            </div>
+        </section>
+    
+        <!-- Sobre a Marca -->
+        <section class="about reveal">
+            <div class="container">
+                <h2 class="section-title">Especialistas em SHEIN</h2>
+                <p>Esqueça o medo de comprar online. A GANHFIL é sua consultoria especializada em garimpar as melhores peças, verificar a qualidade e trazer os links mais desejados da SHEIN diretamente para você.</p>
+                <a href="https://www.instagram.com/ganhfil" target="_blank" class="btn">Ver Dicas no Instagram</a>
+            </div>
+        </section>
+    
+        <!-- Diferenciais -->
+        <section class="features reveal">
+            <div class="container">
+                <h2 class="section-title">Por que seguir nossas dicas?</h2>
+                <div class="features-grid">
+                    <div class="feature-item">
+                        <h3>Garimpo VIP</h3>
+                        <p>Encontramos aquelas peças incríveis e de alta qualidade que ficam escondidas no site.</p>
+                    </div>
+                    <div class="feature-item">
+                        <h3>Review Sincero</h3>
+                        <p>Analisamos tecido, acabamento e caimento para você comprar sem medo de errar.</p>
+                    </div>
+                    <div class="feature-item">
+                        <h3>Máxima Economia</h3>
+                        <p>Ensinamos os truques de pontos, jogos e cupons para você pagar o menor preço.</p>
+                    </div>
+                </div>
+                <div style="text-align: center; margin-top: 30px;">
+                    <a href="https://www.instagram.com/ganhfil" target="_blank" class="btn">Saiba Mais</a>
+                </div>
+            </div>
+        </section>
+    
+        <!-- Nossos Serviços -->
+        <section class="services reveal">
+            <div class="container">
+                <h2 class="section-title">O que oferecemos</h2>
+                <div class="services-grid">
+                    <div class="service-card">
+                        <h3>Links Diretos</h3>
+                        <p>Gostou de algo? Receba o link exato (ID) da peça no seu Direct na hora.</p>
+                    </div>
+                    <div class="service-card">
+                        <h3>Montagem de Looks</h3>
+                        <p>Sugestões de combinações completas usando apenas peças da SHEIN.</p>
+                    </div>
+                    <div class="service-card">
+                        <h3>Guia de Medidas</h3>
+                        <p>Te ajudamos a entender a tabela de medidas para escolher o tamanho ideal.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    
+        <!-- Achados SHEIN -->
+        <section class="shein-section reveal">
+            <div class="container">
+                <h2 class="section-title">Promoções Relâmpago <span class="badge-offer">Destaque</span></h2>
+                <p style="max-width: 700px; margin: 0 auto 20px;">A SHEIN tem ofertas que duram pouco tempo. Nós monitoramos tudo para você não perder nada.</p>
+                <p style="max-width: 700px; margin: 0 auto 30px;">Quer os códigos de cupom que funcionam de verdade? Mande uma mensagem no nosso Instagram agora.</p>
+                <a href="https://www.instagram.com/ganhfil" target="_blank" class="btn btn-primary">Quero Cupons SHEIN</a>
+            </div>
+        </section>
+    
+        <!-- Manifesto da Marca -->
+        <section class="about reveal">
+            <div class="container">
+                <h2 class="section-title">Moda Acessível e Inteligente</h2>
+                <p>Acreditamos que você não precisa gastar uma fortuna para se vestir bem. A SHEIN revolucionou a moda global e nós estamos aqui para garantir que você faça as melhores escolhas.</p>
+                <p>Nossa missão é provar que é possível ter um guarda-roupa incrível, versátil e de qualidade pagando pouco.</p>
+                <a href="https://www.instagram.com/ganhfil" target="_blank" class="btn">Ver Looks no Instagram</a>
+            </div>
+        </section>
+    
+        <!-- Contato -->
+        <section class="contact reveal">
+            <div class="container">
+                <h2>Achou algo incrível?</h2>
+                <p>Estamos online no Instagram para tirar suas dúvidas sobre tecidos, tamanhos e enviar os links dos achadinhos.</p>
+                <a href="https://www.instagram.com/ganhfil" target="_blank" class="btn btn-primary">Ir para o Instagram @ganhfil</a>
+            </div>
+        </section>
+    
+        <!-- Prova Social -->
+        <section class="testimonials reveal">
+            <div class="container">
+                <h2 class="section-title">Quem Usa, Ama</h2>
+                <div class="testimonial-card">
+                    <p>"O conjunto da SHEIN que comprei pela indicação da GANHFIL chegou e é perfeito! O tecido é ótimo."</p>
+                    <p style="margin-top: 10px; font-weight: 600;">- Seguidora Satisfeita</p>
+                </div>
+                <div class="testimonial-card">
+                    <p>"Nunca mais errei o tamanho depois das dicas. E ainda economizei muito com os cupons que elas postaram."</p>
+                    <p style="margin-top: 10px; font-weight: 600;">- Seguidora Satisfeita</p>
+                </div>
+                <a href="https://www.instagram.com/ganhfil" target="_blank" class="btn btn-primary">Siga no Instagram</a>
+            </div>
+        </section>
+    
+        <!-- Footer -->
+        <footer>
+            <div class="container">
+                <p>&copy; 2023 GANHFIL. Todos os direitos reservados.</p>
+                <p style="margin-top: 10px;">
+                    <a href="https://www.instagram.com/ganhfil" target="_blank">Pedir Link no Direct</a>
+                </p>
+            </div>
+        </footer>
+    
+        <!-- Script para Animação de Scroll -->
+        <script>
+            window.addEventListener('scroll', reveal);
+    
+            function reveal() {
+                var reveals = document.querySelectorAll('.reveal');
+                for (var i = 0; i < reveals.length; i++) {
+                    var windowheight = window.innerHeight;
+                    var revealtop = reveals[i].getBoundingClientRect().top;
+                    var revealpoint = 150;
+    
+                    if (revealtop < windowheight - revealpoint) {
+                        reveals[i].classList.add('active');
+                    }
+                }
+            }
+            // Ativar na carga inicial caso já esteja visível
+            reveal();
+    
+            // Script para Efeito de Digitação
+            const typingText = document.getElementById('typing-text');
+            const phrases = [
+                "Achadinhos Incríveis.",
+                "Moda Acessível.",
+                "Looks Tendência."
+            ];
+            let phraseIndex = 0;
+            let charIndex = 0;
+            let isDeleting = false;
+    
+            function type() {
+                const currentPhrase = phrases[phraseIndex];
+                if (isDeleting) {
+                    typingText.textContent = currentPhrase.substring(0, charIndex--);
+                } else {
+                    typingText.textContent = currentPhrase.substring(0, charIndex++);
+                }
+    
+                if (!isDeleting && charIndex === currentPhrase.length) {
+                    setTimeout(() => isDeleting = true, 2000);
+                } else if (isDeleting && charIndex === 0) {
+                    isDeleting = false;
+                    phraseIndex = (phraseIndex + 1) % phrases.length;
+                }
+    
+                const typingSpeed = isDeleting ? 50 : 100;
+                setTimeout(type, typingSpeed);
+            }
+    
+            document.addEventListener('DOMContentLoaded', type);
+        </script>
+    </body>
+</html>
