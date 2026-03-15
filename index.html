@@ -3,27 +3,28 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>GANHFIL | Estilo e Exclusividade</title>
+    <title>@gan.ficiak | Experiência Cinematográfica Shein</title>
     
-    <!-- Importação de Fontes: Playfair Display (Títulos) e Montserrat (Corpo) -->
+    <!-- Fonts: Montserrat & Lato as requested -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500&family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&family=Montserrat:wght@300;600;800&display=swap" rel="stylesheet">
+    
+    <!-- GSAP CDNs -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
 
     <style>
-        /* --- Variáveis de Design (Paleta de Cores) --- */
+        /* --- CSS Reset & Variables --- */
         :root {
-            --bg-color: #F9F8F4; /* Off-white/Beige suave */
-            --text-color: #333333; /* Preto suave para leitura */
-            --accent-color: #D4AF37; /* Dourado */
-            --white: #FFFFFF;
-            --black: #000000;
-            
-            --font-title: 'Playfair Display', serif;
-            --font-body: 'Montserrat', sans-serif;
+            --bg-color: #0a0a0a;
+            --text-main: #ffffff;
+            --text-muted: #b0b0b0;
+            --accent: #d4af37; /* Elegant Gold */
+            --font-display: 'Montserrat', sans-serif;
+            --font-body: 'Lato', sans-serif;
         }
 
-        /* --- Reset e Base --- */
         * {
             margin: 0;
             padding: 0;
@@ -31,565 +32,535 @@
         }
 
         body {
-            font-family: var(--font-body);
             background-color: var(--bg-color);
-            color: var(--text-color);
-            line-height: 1.6;
-            overflow-x: hidden; /* Previne rolagem lateral no mobile */
+            color: var(--text-main);
+            font-family: var(--font-body);
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
         }
 
+        /* --- Typography --- */
         h1, h2, h3 {
-            font-family: var(--font-title);
-            color: var(--black);
-            margin-bottom: 1rem;
+            font-family: var(--font-display);
+            text-transform: uppercase;
+            letter-spacing: 2px;
         }
 
         a {
             text-decoration: none;
+            color: inherit;
             transition: 0.3s ease;
         }
 
-        img {
-            max-width: 100%;
-            display: block;
-        }
-
-        /* --- Componentes --- */
-        .container {
-            width: 90%;
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 15px;
-        }
-
-        .btn {
-            display: inline-block;
-            padding: 12px 30px;
-            border: 1px solid var(--black);
-            background-color: transparent;
-            color: var(--black);
-            font-family: var(--font-body);
-            text-transform: uppercase;
-            font-size: 0.9rem;
-            letter-spacing: 1px;
-            cursor: pointer;
-            margin-top: 1rem;
-        }
-
-        .btn:hover {
-            background-color: var(--black);
-            color: var(--white);
-        }
-
-        .btn-primary {
-            background-color: var(--black);
-            color: var(--white);
-        }
-
-        .btn-primary:hover {
-            background-color: var(--accent-color);
-            border-color: var(--accent-color);
-        }
-
-        /* --- Header --- */
-        header {
-            padding: 20px 0;
-            text-align: center;
-            border-bottom: 1px solid #e0e0e0;
+        /* --- Navigation --- */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            padding: 20px 50px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 1000;
+            mix-blend-mode: difference; /* Ensures visibility on light/dark videos */
         }
 
         .logo {
-            font-family: var(--font-title);
-            font-size: 1.8rem;
-            font-weight: 700;
-            letter-spacing: 2px;
-            color: var(--black);
+            font-size: 1.5rem;
+            font-weight: 800;
         }
 
-        /* --- Hero Section --- */
-        .hero {
-            min-height: 80vh; /* Altura mínima flexível */
-            padding: 60px 0; /* Espaço para não colar nas bordas no mobile */
-            background-color: #333; /* Cor de fundo enquanto a imagem carrega */
-            background-position: center;
+        .nav-links {
             display: flex;
-            align-items: center;
-            justify-content: center;
-            text-align: center;
-            position: relative;
-            overflow: hidden;
+            gap: 30px;
         }
 
-        /* Fundo animado com partículas */
-        .hero .shapes {
-            position: absolute;
-            top: 0; left: 0; width: 100%; height: 100%;
-            overflow: hidden;
+        .nav-links a {
+            font-size: 0.9rem;
+            font-weight: 600;
         }
-        .hero .shapes div {
-            position: absolute;
-            display: block;
-            width: 20px; height: 20px;
-            background: rgba(255, 255, 255, 0.15);
-            border-radius: 50%;
-            bottom: -150px;
-            animation: animateShapes 25s linear infinite;
-        }
-        .hero .shapes div:nth-child(1) { left: 25%; width: 80px; height: 80px; animation-delay: 0s; }
-        .hero .shapes div:nth-child(2) { left: 10%; width: 20px; height: 20px; animation-delay: 2s; animation-duration: 12s; }
-        .hero .shapes div:nth-child(3) { left: 70%; width: 20px; height: 20px; animation-delay: 4s; }
-        .hero .shapes div:nth-child(4) { left: 40%; width: 60px; height: 60px; animation-delay: 0s; animation-duration: 18s; }
-        .hero .shapes div:nth-child(5) { left: 65%; width: 20px; height: 20px; animation-delay: 0s; }
-        .hero .shapes div:nth-child(6) { left: 85%; width: 110px; height: 110px; animation-delay: 1s; }
 
-        /* Animação de fundo suave (Ken Burns Effect) */
+        /* --- Hero Section (Cinematic Video) --- */
         .hero {
-            animation: 
-                bgZoom 20s infinite alternate,
-                changeBg 28s infinite linear;
-        }
-        @keyframes bgZoom {
-            from { background-size: 110% auto; }
-            to { background-size: 120% auto; }
-        }
-        @keyframes changeBg {
-            0%   { background-image: url('https://images.unsplash.com/photo-1490481651871-ab68de25d43d?q=80&w=1920&auto=format&fit=crop'); }
-            25%  { background-image: url('https://images.unsplash.com/photo-1490481651871-ab68de25d43d?q=80&w=1920&auto=format&fit=crop'); }
-            30%  { background-image: url('https://images.unsplash.com/photo-1523381294911-8d3cead13475?q=80&w=1920&auto=format&fit=crop'); }
-            55%  { background-image: url('https://images.unsplash.com/photo-1523381294911-8d3cead13475?q=80&w=1920&auto=format&fit=crop'); }
-            60%  { background-image: url('https://images.unsplash.com/photo-1551488831-00ddcb6c6bd3?q=80&w=1920&auto=format&fit=crop'); }
-            85%  { background-image: url('https://images.unsplash.com/photo-1551488831-00ddcb6c6bd3?q=80&w=1920&auto=format&fit=crop'); }
-            90%  { background-image: url('https://images.unsplash.com/photo-1567401893414-76b7b1e5a7a5?q=80&w=1920&auto=format&fit=crop'); }
-            100% { background-image: url('https://images.unsplash.com/photo-1567401893414-76b7b1e5a7a5?q=80&w=1920&auto=format&fit=crop'); }
+            position: relative;
+            height: 100vh;
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
         }
 
-        .hero::after {
-            content: '';
+        .video-bg {
             position: absolute;
-            top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(0,0,0,0.3); /* Máscara escura para legibilidade */
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: 1;
+            opacity: 0.6; /* Slight dim for text readability */
+        }
+
+        .hero-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to bottom, rgba(0,0,0,0.2), #0a0a0a);
+            z-index: 2;
         }
 
         .hero-content {
             position: relative;
-            z-index: 2;
-            color: var(--white);
+            z-index: 3;
+            text-align: center;
+            max-width: 800px;
             padding: 20px;
         }
-        
-        /* Animação de entrada do texto Hero */
-        .hero-content {
-            animation: fadeInUp 1.5s ease-out;
+
+        .hero-title {
+            font-size: 4rem;
+            font-weight: 800;
+            line-height: 1.1;
+            margin-bottom: 20px;
+            clip-path: polygon(0 0, 100% 0, 100% 100%, 0% 100%);
         }
 
-        .hero h1 {
-            color: var(--white);
-            font-size: 2rem; /* Fonte menor para mobile */
-            margin-bottom: 1.5rem;
-        }
-
-        /* Efeito de digitação */
-        #typing-text::after {
-            content: '|';
-            animation: blink 0.7s infinite;
+        .hero-subtitle {
+            font-size: 1.2rem;
+            color: var(--text-muted);
+            margin-bottom: 40px;
             font-weight: 300;
         }
-        @keyframes blink {
-            50% { opacity: 0; }
-        }
-        
-        @keyframes animateShapes {
-            0% { transform: translateY(0) rotate(0deg); opacity: 1; }
-            100% { transform: translateY(-1000px) rotate(720deg); opacity: 0; }
-        }
-        
-        @keyframes fadeInUp {
-            from { opacity: 0; transform: translateY(30px); }
-            to { opacity: 1; transform: translateY(0); }
+
+        .cta-btn {
+            display: inline-block;
+            padding: 15px 40px;
+            border: 1px solid var(--text-main);
+            color: var(--text-main);
+            font-family: var(--font-display);
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            position: relative;
+            overflow: hidden;
+            background: transparent;
+            cursor: pointer;
         }
 
-        /* --- Sobre a Marca --- */
-        .about {
-            padding: 50px 0; /* Padding reduzido para mobile */
-            text-align: center;
-            /* background-color: var(--white); */
+        .cta-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--text-main);
+            transform: scaleX(0);
+            transform-origin: right;
+            transition: transform 0.4s ease;
+            z-index: -1;
         }
 
-        /* Fundo animado para seções brancas */
-        .about, .services, .contact, .shein-section {
-            background: linear-gradient(-45deg, #ffffff, #fdfcf9, #f7f7f7, #ffffff);
-            background-size: 400% 400%;
-            animation: gradientBG 25s ease infinite;
+        .cta-btn:hover {
+            color: var(--bg-color);
         }
 
-        .about p {
-            max-width: 700px;
-            margin: 0 auto 20px;
-            font-size: 1.1rem;
+        .cta-btn:hover::before {
+            transform: scaleX(1);
+            transform-origin: left;
         }
 
-        /* --- Diferenciais --- */
-        .features {
-            background: linear-gradient(-45deg, #fff, #fdfbf7, #fff, #f5f5f5);
-            background-size: 400% 400%;
-            animation: gradientBG 15s ease infinite;
-            padding: 50px 0;
-        }
-        
-        @keyframes gradientBG {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
-        }
-
-        .features-grid {
-            display: grid;
-            grid-template-columns: 1fr;
-            gap: 40px;
-            text-align: center;
-        }
-
-        .feature-item h3 {
-            color: var(--accent-color);
-            font-size: 1.3rem;
-        }
-
-        /* --- Elementos Gerais --- */
-        .section-title {
-            text-align: center;
-            font-size: 1.75rem; /* Título menor no mobile */
-            margin-bottom: 3rem;
+        /* --- Sections General --- */
+        section {
+            padding: 100px 50px;
             position: relative;
         }
 
-        .section-title::after {
-            content: '';
-            display: block;
-            width: 50px;
-            height: 2px;
-            background-color: var(--accent-color);
-            margin: 10px auto 0;
-        }
-
-        /* --- Prova Social --- */
-        .testimonials {
-            padding: 50px 0;
-            background-color: var(--bg-color);
+        .section-header {
+            margin-bottom: 60px;
             text-align: center;
         }
+
+        .section-header h2 {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+        }
+
+        /* --- Gallery / Curadoria --- */
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 40px;
+        }
+
+        .product-card {
+            position: relative;
+            height: 500px;
+            overflow: hidden;
+            cursor: pointer;
+        }
+
+        .product-media {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.6s ease;
+        }
+
+        /* Video on Hover Styles */
+        .video-hover {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0;
+            z-index: 1;
+            transition: opacity 0.4s ease;
+        }
+
+        .product-card:hover .video-hover {
+            opacity: 1;
+        }
+
+        /* Simulate video on hover by swapping opacity or using JS */
+        .product-card:hover .product-media {
+            transform: scale(1.05);
+        }
+
+        .product-info {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            padding: 20px;
+            background: linear-gradient(to top, rgba(0,0,0,0.9), transparent);
+            transform: translateY(20px);
+            opacity: 0;
+            transition: all 0.4s ease;
+            z-index: 2; /* Garante que o texto fique acima do vídeo */
+        }
+
+        .product-card:hover .product-info {
+            transform: translateY(0);
+            opacity: 1;
+        }
+
+        /* --- Testimonials / Social Proof --- */
+        .testimonials {
+            background-color: #111;
+        }
+
+        .testimonial-slider {
+            display: flex;
+            gap: 30px;
+            overflow-x: auto;
+            padding-bottom: 40px;
+            scrollbar-width: none; /* Hide scrollbar Firefox */
+        }
+        .testimonial-slider::-webkit-scrollbar { display: none; } /* Hide Chrome */
 
         .testimonial-card {
-            background: var(--white);
+            min-width: 350px;
+            background: #1a1a1a;
             padding: 30px;
-            margin: 20px auto;
-            max-width: 600px;
-            border-left: 3px solid var(--accent-color);
+            border-left: 3px solid var(--accent);
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .user-profile {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .user-img {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background-color: #333;
+            object-fit: cover;
+        }
+
+        .quote {
             font-style: italic;
+            color: var(--text-muted);
+            line-height: 1.6;
         }
 
-        /* --- Seção de Serviços --- */
-        .services {
-            padding: 50px 0;
-            /* background-color: var(--white); */
-        }
-        .services-grid {
-            display: grid;
-            grid-template-columns: 1fr;
-            gap: 30px;
-            margin-top: 3rem;
-        }
-        .service-card {
+        /* --- Exclusive Coupons --- */
+        .coupons {
             text-align: center;
-            padding: 40px 20px;
-            border: 1px solid #eee;
-            border-radius: 8px;
-            transition: all 0.3s ease;
-        }
-        .service-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 10px 30px rgba(0,0,0,0.07);
-        }
-        .service-card h3 {
-            font-size: 1.4rem;
-            color: var(--black);
+            border-top: 1px solid #333;
         }
 
-        /* --- Seção SHEIN --- */
-        .shein-section {
-            padding: 50px 0;
-            text-align: center;
-            border-top: 1px solid #eee;
+        .coupon-box {
+            display: inline-flex;
+            align-items: center;
+            background: #222;
+            padding: 20px 40px;
+            border: 1px dashed var(--accent);
+            margin-top: 30px;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
         }
 
-        /* Badge de Destaque */
-        .badge-offer {
-            background-color: #ff4757;
-            color: white;
-            font-size: 0.7rem;
-            padding: 5px 12px;
-            border-radius: 20px;
-            vertical-align: middle;
-            margin-left: 10px;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            font-weight: bold;
-            box-shadow: 0 4px 15px rgba(255, 71, 87, 0.4);
-            animation: pulse-badge 2s infinite;
-            display: inline-block;
+        .coupon-code {
+            font-size: 1.5rem;
+            font-family: var(--font-display);
+            letter-spacing: 3px;
+            margin-right: 20px;
         }
 
-        @keyframes pulse-badge {
-            0% { transform: scale(1); }
-            50% { transform: scale(1.1); }
-            100% { transform: scale(1); }
-        }
-
-        /* --- Seção de Contato --- */
-        .contact {
-            padding: 50px 0;
-            /* background: var(--white); */
-            text-align: center;
-        }
-        .contact h2 {
-            font-size: 2.2rem;
-        }
-        .contact p {
-            max-width: 600px;
-            margin: 0 auto 2rem;
-        }
-
-        /* --- Footer --- */
-        footer {
-            background-color: var(--black);
-            color: var(--white);
-            padding: 40px 0;
-            text-align: center;
-        }
-
-        footer p {
-            font-size: 0.9rem;
-            opacity: 0.8;
-        }
-
-        footer a {
-            color: var(--accent-color);
-        }
-
-        /* --- Media Queries (Desktop) --- */
-        @media (min-width: 768px) {
-            .hero h1 { font-size: 3.5rem; }
-            .section-title { font-size: 2.5rem; }
-            
-            .services-grid {
-                grid-template-columns: repeat(3, 1fr);
-            }
-
-            .features-grid {
-                grid-template-columns: repeat(3, 1fr);
-            }
-
-            /* Restaurar espaçamentos maiores no Desktop */
-            .about, 
-            .features, 
-            .services,
-            .shein-section, 
-            .contact, 
-            .testimonials {
-                padding: 80px 0;
-            }
-        }
-
-        /* --- Classe para Animação de Scroll (JS) --- */
-        .reveal {
-            opacity: 0;
-            transform: translateY(50px);
-            transition: all 1s ease;
-        }
-        .reveal.active {
-            opacity: 1;
-            transform: translateY(0);
+        /* --- Responsive --- */
+        @media (max-width: 768px) {
+            .hero-title { font-size: 2.5rem; }
+            nav { padding: 20px; }
+            .nav-links { display: none; } /* Simple hiding for demo */
+            section { padding: 60px 20px; }
         }
     </style>
 </head>
 <body>
-    
-        <!-- Header -->
-        <header>
-            <div class="container">
-                <div class="logo">GANHFIL</div>
-            </div>
-        </header>
-    
-        <!-- Hero Section -->
-        <section class="hero">
-            <div class="shapes">
-                <div></div><div></div><div></div><div></div><div></div><div></div>
-            </div>
-            <div class="hero-content">
-                <h1>GANHFIL: O Melhor da SHEIN <span id="typing-text"></span></h1>
-                <a href="https://www.instagram.com/ganhfil" target="_blank" class="btn btn-primary">Ver Achadinhos</a>
-            </div>
-        </section>
-    
-        <!-- Sobre a Marca -->
-        <section class="about reveal">
-            <div class="container">
-                <h2 class="section-title">Especialistas em SHEIN</h2>
-                <p>Esqueça o medo de comprar online. A GANHFIL é sua consultoria especializada em garimpar as melhores peças, verificar a qualidade e trazer os links mais desejados da SHEIN diretamente para você.</p>
-                <a href="https://www.instagram.com/ganhfil" target="_blank" class="btn">Ver Dicas no Instagram</a>
-            </div>
-        </section>
-    
-        <!-- Diferenciais -->
-        <section class="features reveal">
-            <div class="container">
-                <h2 class="section-title">Por que seguir nossas dicas?</h2>
-                <div class="features-grid">
-                    <div class="feature-item">
-                        <h3>Garimpo VIP</h3>
-                        <p>Encontramos aquelas peças incríveis e de alta qualidade que ficam escondidas no site.</p>
-                    </div>
-                    <div class="feature-item">
-                        <h3>Review Sincero</h3>
-                        <p>Analisamos tecido, acabamento e caimento para você comprar sem medo de errar.</p>
-                    </div>
-                    <div class="feature-item">
-                        <h3>Máxima Economia</h3>
-                        <p>Ensinamos os truques de pontos, jogos e cupons para você pagar o menor preço.</p>
-                    </div>
-                </div>
-                <div style="text-align: center; margin-top: 30px;">
-                    <a href="https://www.instagram.com/ganhfil" target="_blank" class="btn">Saiba Mais</a>
-                </div>
-            </div>
-        </section>
-    
-        <!-- Nossos Serviços -->
-        <section class="services reveal">
-            <div class="container">
-                <h2 class="section-title">O que oferecemos</h2>
-                <div class="services-grid">
-                    <div class="service-card">
-                        <h3>Links Diretos</h3>
-                        <p>Gostou de algo? Receba o link exato (ID) da peça no seu Direct na hora.</p>
-                    </div>
-                    <div class="service-card">
-                        <h3>Montagem de Looks</h3>
-                        <p>Sugestões de combinações completas usando apenas peças da SHEIN.</p>
-                    </div>
-                    <div class="service-card">
-                        <h3>Guia de Medidas</h3>
-                        <p>Te ajudamos a entender a tabela de medidas para escolher o tamanho ideal.</p>
-                    </div>
+
+    <!-- Navigation -->
+    <nav>
+        <div class="logo">@GAN.FICIAK</div>
+        <div class="nav-links">
+            <a href="#home">Home</a>
+            <a href="#collection">Curadoria</a>
+            <a href="#testimonials">Depoimentos</a>
+            <a href="#exclusive">VIP</a>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <header class="hero" id="home">
+        <!-- 
+            NOTE: For production, replace src with your optimized .mp4 / .webm file.
+            Using a poster image for fallback.
+        -->
+        <video class="video-bg" autoplay muted loop playsinline poster="https://images.unsplash.com/photo-1490481651871-32d2e7cd4c48?q=80&w=2000&auto=format&fit=crop">
+            <!-- Vídeo de Moda Fashion (Desfile/Caminhada) -->
+            <source src="https://videos.pexels.com/video-files/3205807/3205807-hd_1920_1080_25fps.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
+        
+        <div class="hero-overlay"></div>
+
+        <div class="hero-content">
+            <h1 class="hero-title">Estilo que<br>Conta Histórias</h1>
+            <p class="hero-subtitle">Curadoria exclusiva Shein por @gan.ficiak</p>
+            <a href="#collection" class="cta-btn">Explorar Coleção</a>
+        </div>
+    </header>
+
+    <!-- Curated Collection -->
+    <section id="collection">
+        <div class="section-header">
+            <h2 class="gs-reveal">Showroom Digital</h2>
+            <p class="gs-reveal">Peças selecionadas para elevar sua presença.</p>
+            <p style="font-size: 0.8rem; color: #666; margin-top: 5px;">(Passe o mouse para ver os detalhes em vídeo)</p>
+        </div>
+
+        <div class="gallery-grid">
+            <!-- Product 1 -->
+            <div class="product-card gs-card" onmouseenter="playVideo(this)" onmouseleave="pauseVideo(this)">
+                <img src="https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?q=80&w=800&auto=format&fit=crop" class="product-media" alt="Vestido Shein">
+                <!-- Vídeo do Produto 1 -->
+                <video class="video-hover" src="https://videos.pexels.com/video-files/4937326/4937326-hd_1080_1920_30fps.mp4" muted loop playsinline></video>
+                <div class="product-info">
+                    <h3>Vestido Satin Luxe</h3>
+                    <p>SHEIN ID: 123456</p>
                 </div>
             </div>
-        </section>
-    
-        <!-- Achados SHEIN -->
-        <section class="shein-section reveal">
-            <div class="container">
-                <h2 class="section-title">Promoções Relâmpago <span class="badge-offer">Destaque</span></h2>
-                <p style="max-width: 700px; margin: 0 auto 20px;">A SHEIN tem ofertas que duram pouco tempo. Nós monitoramos tudo para você não perder nada.</p>
-                <p style="max-width: 700px; margin: 0 auto 30px;">Quer os códigos de cupom que funcionam de verdade? Mande uma mensagem no nosso Instagram agora.</p>
-                <a href="https://www.instagram.com/ganhfil" target="_blank" class="btn btn-primary">Quero Cupons SHEIN</a>
-            </div>
-        </section>
-    
-        <!-- Manifesto da Marca -->
-        <section class="about reveal">
-            <div class="container">
-                <h2 class="section-title">Moda Acessível e Inteligente</h2>
-                <p>Acreditamos que você não precisa gastar uma fortuna para se vestir bem. A SHEIN revolucionou a moda global e nós estamos aqui para garantir que você faça as melhores escolhas.</p>
-                <p>Nossa missão é provar que é possível ter um guarda-roupa incrível, versátil e de qualidade pagando pouco.</p>
-                <a href="https://www.instagram.com/ganhfil" target="_blank" class="btn">Ver Looks no Instagram</a>
-            </div>
-        </section>
-    
-        <!-- Contato -->
-        <section class="contact reveal">
-            <div class="container">
-                <h2>Achou algo incrível?</h2>
-                <p>Estamos online no Instagram para tirar suas dúvidas sobre tecidos, tamanhos e enviar os links dos achadinhos.</p>
-                <a href="https://www.instagram.com/ganhfil" target="_blank" class="btn btn-primary">Ir para o Instagram @ganhfil</a>
-            </div>
-        </section>
-    
-        <!-- Prova Social -->
-        <section class="testimonials reveal">
-            <div class="container">
-                <h2 class="section-title">Quem Usa, Ama</h2>
-                <div class="testimonial-card">
-                    <p>"O conjunto da SHEIN que comprei pela indicação da GANHFIL chegou e é perfeito! O tecido é ótimo."</p>
-                    <p style="margin-top: 10px; font-weight: 600;">- Seguidora Satisfeita</p>
+            <!-- Product 2 -->
+            <div class="product-card gs-card" onmouseenter="playVideo(this)" onmouseleave="pauseVideo(this)">
+                <img src="https://images.unsplash.com/photo-1539008835657-9e8e9680c956?q=80&w=800&auto=format&fit=crop" class="product-media" alt="Look Urbano">
+                <!-- Vídeo do Produto 2 -->
+                <video class="video-hover" src="https://videos.pexels.com/video-files/6312492/6312492-hd_1080_1920_25fps.mp4" muted loop playsinline></video>
+                <div class="product-info">
+                    <h3>Velvet Blazer</h3>
+                    <p>SHEIN ID: 987654</p>
                 </div>
-                <div class="testimonial-card">
-                    <p>"Nunca mais errei o tamanho depois das dicas. E ainda economizei muito com os cupons que elas postaram."</p>
-                    <p style="margin-top: 10px; font-weight: 600;">- Seguidora Satisfeita</p>
+            </div>
+            <!-- Product 3 -->
+            <div class="product-card gs-card" onmouseenter="playVideo(this)" onmouseleave="pauseVideo(this)">
+                <img src="https://images.unsplash.com/photo-1550614000-4b9519e0233e?q=80&w=800&auto=format&fit=crop" class="product-media" alt="Acessórios">
+                <!-- Vídeo do Produto 3 -->
+                <video class="video-hover" src="https://videos.pexels.com/video-files/7653696/7653696-hd_1080_1920_25fps.mp4" muted loop playsinline></video>
+                <div class="product-info">
+                    <h3>Conjunto Minimalist</h3>
+                    <p>SHEIN ID: 567890</p>
                 </div>
-                <a href="https://www.instagram.com/ganhfil" target="_blank" class="btn btn-primary">Siga no Instagram</a>
             </div>
-        </section>
-    
-        <!-- Footer -->
-        <footer>
-            <div class="container">
-                <p>&copy; 2023 GANHFIL. Todos os direitos reservados.</p>
-                <p style="margin-top: 10px;">
-                    <a href="https://www.instagram.com/ganhfil" target="_blank">Pedir Link no Direct</a>
-                </p>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section class="testimonials" id="testimonials">
+        <div class="section-header">
+            <h2 class="gs-reveal">Vozes do Estilo</h2>
+            <p class="gs-reveal">Quem usa, ama e compartilha.</p>
+        </div>
+
+        <div class="testimonial-slider gs-slider-anim">
+            <!-- Testimonial 1 -->
+            <div class="testimonial-card">
+                <div class="user-profile">
+                    <img src="https://randomuser.me/api/portraits/women/44.jpg" alt="User" class="user-img">
+                    <div>
+                        <h4>@mari.style</h4>
+                        <small>Seguidora</small>
+                    </div>
+                </div>
+                <p class="quote">"A curadoria da @gan.ficiak mudou meu guarda-roupa. As peças da Shein que ela indica têm qualidade real!"</p>
             </div>
-        </footer>
-    
-        <!-- Script para Animação de Scroll -->
-        <script>
-            window.addEventListener('scroll', reveal);
-    
-            function reveal() {
-                var reveals = document.querySelectorAll('.reveal');
-                for (var i = 0; i < reveals.length; i++) {
-                    var windowheight = window.innerHeight;
-                    var revealtop = reveals[i].getBoundingClientRect().top;
-                    var revealpoint = 150;
-    
-                    if (revealtop < windowheight - revealpoint) {
-                        reveals[i].classList.add('active');
-                    }
-                }
+            <!-- Testimonial 2 -->
+            <div class="testimonial-card">
+                <div class="user-profile">
+                    <img src="https://randomuser.me/api/portraits/women/65.jpg" alt="User" class="user-img">
+                    <div>
+                        <h4>@julia.fashion</h4>
+                        <small>Inner Circle</small>
+                    </div>
+                </div>
+                <p class="quote">"Os vídeos de caimento ajudam demais a não errar no tamanho. Confiança total."</p>
+            </div>
+            <!-- Testimonial 3 -->
+            <div class="testimonial-card">
+                <div class="user-profile">
+                    <img src="https://randomuser.me/api/portraits/women/33.jpg" alt="User" class="user-img">
+                    <div>
+                        <h4>@ana.trends</h4>
+                        <small>Seguidora</small>
+                    </div>
+                </div>
+                <p class="quote">"Peguei o cupom VIP e comprei o look completo do último vídeo. Chegou perfeito!"</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Exclusive Coupons -->
+    <section class="coupons" id="exclusive">
+        <div class="section-header">
+            <h2 class="gs-reveal">Acesso VIP</h2>
+        </div>
+        <div class="coupon-box gs-scale">
+            <span class="coupon-code">GANFICIAK15</span>
+            <button class="cta-btn" onclick="copyCoupon(this)">Copiar</button>
+        </div>
+        <p style="margin-top: 20px; color: var(--text-muted); font-size: 0.8rem;">15% OFF em compras acima de R$100</p>
+    </section>
+
+    <footer>
+        <div style="text-align: center; padding: 40px; border-top: 1px solid #222;">
+            <p>&copy; 2023 @gan.ficiak. Affiliate Partner Shein.</p>
+        </div>
+    </footer>
+
+    <!-- GSAP Scripting -->
+    <script>
+        // Register ScrollTrigger
+        gsap.registerPlugin(ScrollTrigger);
+
+        // 1. Hero Animation (Load)
+        const tl = gsap.timeline();
+        tl.from(".hero-title", {
+            y: 100,
+            opacity: 0,
+            duration: 1.2,
+            ease: "power4.out",
+            skewY: 7
+        })
+        .from(".hero-subtitle", {
+            y: 20,
+            opacity: 0,
+            duration: 0.8,
+            ease: "power2.out"
+        }, "-=0.8")
+        .from(".cta-btn", {
+            y: 20,
+            opacity: 0,
+            duration: 0.8,
+            ease: "power2.out"
+        }, "-=0.6");
+
+        // 2. Section Headers Reveal
+        gsap.utils.toArray('.gs-reveal').forEach(element => {
+            gsap.from(element, {
+                scrollTrigger: {
+                    trigger: element,
+                    start: "top 80%",
+                    toggleActions: "play none none reverse"
+                },
+                y: 50,
+                opacity: 0,
+                duration: 1,
+                ease: "power3.out"
+            });
+        });
+
+        // 3. Product Grid Stagger
+        gsap.from(".gs-card", {
+            scrollTrigger: {
+                trigger: ".gallery-grid",
+                start: "top 75%"
+            },
+            y: 100,
+            opacity: 0,
+            duration: 1,
+            stagger: 0.2,
+            ease: "power3.out"
+        });
+
+        // 4. Testimonial Slider slide-in
+        gsap.from(".gs-slider-anim", {
+            scrollTrigger: {
+                trigger: ".testimonials",
+                start: "top 70%"
+            },
+            x: 100,
+            opacity: 0,
+            duration: 1.2,
+            ease: "power2.out"
+        });
+
+        // Simple Copy Coupon Logic
+        function copyCoupon(btn) {
+            const code = btn.previousElementSibling.innerText;
+            navigator.clipboard.writeText(code).then(() => {
+                const originalText = btn.innerText;
+                btn.innerText = "Copiado!";
+                btn.style.backgroundColor = "#d4af37";
+                btn.style.color = "#000";
+                setTimeout(() => {
+                    btn.innerText = originalText;
+                    btn.style.backgroundColor = "transparent";
+                    btn.style.color = "#fff";
+                }, 2000);
+            });
+        }
+
+        // Video Play/Pause Logic for Products
+        function playVideo(card) {
+            const vid = card.querySelector('video');
+            if(vid) vid.play();
+        }
+        function pauseVideo(card) {
+            const vid = card.querySelector('video');
+            if(vid) {
+                vid.pause();
+                vid.currentTime = 0; // Reset to start
             }
-            // Ativar na carga inicial caso já esteja visível
-            reveal();
-    
-            // Script para Efeito de Digitação
-            const typingText = document.getElementById('typing-text');
-            const phrases = [
-                "Achadinhos Incríveis.",
-                "Moda Acessível.",
-                "Looks Tendência."
-            ];
-            let phraseIndex = 0;
-            let charIndex = 0;
-            let isDeleting = false;
-    
-            function type() {
-                const currentPhrase = phrases[phraseIndex];
-                if (isDeleting) {
-                    typingText.textContent = currentPhrase.substring(0, charIndex--);
-                } else {
-                    typingText.textContent = currentPhrase.substring(0, charIndex++);
-                }
-    
-                if (!isDeleting && charIndex === currentPhrase.length) {
-                    setTimeout(() => isDeleting = true, 2000);
-                } else if (isDeleting && charIndex === 0) {
-                    isDeleting = false;
-                    phraseIndex = (phraseIndex + 1) % phrases.length;
-                }
-    
-                const typingSpeed = isDeleting ? 50 : 100;
-                setTimeout(type, typingSpeed);
-            }
-    
-            document.addEventListener('DOMContentLoaded', type);
-        </script>
-    </body>
+        }
+    </script>
+</body>
 </html>
