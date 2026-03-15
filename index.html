@@ -37,6 +37,7 @@
 
         html {
             scroll-behavior: smooth;
+            -webkit-text-size-adjust: 100%; /* Evita que o iOS aumente o texto automaticamente */
         }
 
         body {
@@ -712,10 +713,12 @@
 
         /* 8. RESPONSIVIDADE */
         @media (max-width: 768px) {
-            h1 { font-size: 2.5rem; }
-            h2 { font-size: 2rem; }
-            .container { padding: 4rem 1rem; }
-            .main-header { padding: 1rem 1.5rem; } /* Adjusted padding */
+            html { font-size: 85%; } /* Reduz levemente a escala de tudo no mobile */
+            h1 { font-size: 2rem; word-wrap: break-word; } /* Título menor e quebra linha se necessário */
+            h2 { font-size: 1.6rem; }
+            .container { padding: 2.5rem 1rem; } /* Menos espaçamento nas laterais e altura */
+            .main-header { padding: 0.8rem 1rem; }
+            .hero-content p { font-size: 1rem; padding: 0 1rem; }
             .main-nav#main-nav-desktop { display: none; } /* Hide desktop nav specifically */
             .counters { flex-direction: column; gap: 2rem; }
         }
