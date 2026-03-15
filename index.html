@@ -2,27 +2,31 @@
 <html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@gan.ficiak | Experiência Cinematográfica Shein</title>
-    
-    <!-- Fonts: Montserrat & Lato as requested -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>gan.ficiak - Sua Curadoria Shein de Luxo</title>
+
+    <!-- Google Fonts: Montserrat & Lato -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&family=Montserrat:wght@300;600;800&display=swap" rel="stylesheet">
-    
-    <!-- GSAP CDNs -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
+
+    <!-- Font Awesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+    <!-- Swiper.js for Carousel -->
+    <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
 
     <style>
-        /* --- CSS Reset & Variables --- */
+        /* 1. PRINCIPIOS DE DESIGN: RESET E VARIÁVEIS GLOBAIS */
         :root {
-            --bg-color: #0a0a0a;
-            --text-main: #ffffff;
-            --text-muted: #b0b0b0;
-            --accent: #d4af37; /* Elegant Gold */
-            --font-display: 'Montserrat', sans-serif;
-            --font-body: 'Lato', sans-serif;
+            --color-background: #0a0a0a;
+            --color-text: #f0f0f0;
+            --color-primary: #ffffff;
+            --color-secondary: #a0a0a0;
+            --color-accent: #d4af37; /* Um dourado sutil como cor de destaque */
+
+            --font-primary: 'Montserrat', sans-serif;
+            --font-secondary: 'Lato', sans-serif;
         }
 
         * {
@@ -31,536 +35,1235 @@
             box-sizing: border-box;
         }
 
-        body {
-            background-color: var(--bg-color);
-            color: var(--text-main);
-            font-family: var(--font-body);
-            overflow-x: hidden;
-            -webkit-font-smoothing: antialiased;
+        html {
+            scroll-behavior: smooth;
         }
 
-        /* --- Typography --- */
-        h1, h2, h3 {
-            font-family: var(--font-display);
-            text-transform: uppercase;
-            letter-spacing: 2px;
+        body {
+            background-color: var(--color-background);
+            color: var(--color-text);
+            font-family: var(--font-secondary);
+            line-height: 1.6;
+            overflow-x: hidden;
         }
+
+        h1, h2, h3 {
+            font-family: var(--font-primary);
+            font-weight: 600;
+            line-height: 1.2;
+        }
+
+        h1 { font-size: 4rem; }
+        h2 { font-size: 2.5rem; text-align: center; margin-bottom: 3rem; }
+        h3 { font-size: 1.5rem; }
+
+        p { color: var(--color-secondary); }
 
         a {
+            color: var(--color-primary);
             text-decoration: none;
-            color: inherit;
-            transition: 0.3s ease;
         }
 
-        /* --- Navigation --- */
-        nav {
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 6rem 2rem;
+        }
+
+        /* 2. HEADER E NAVEGAÇÃO */
+        .main-header {
             position: fixed;
             top: 0;
+            left: 0;
             width: 100%;
-            padding: 20px 50px;
+            padding: 1.5rem 2rem;
+            z-index: 1000;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            z-index: 1000;
-            mix-blend-mode: difference; /* Ensures visibility on light/dark videos */
+            background: linear-gradient(180deg, rgba(0,0,0,0.5) 0%, rgba(0,0,0,0) 100%);
+            transition: background 0.3s ease;
         }
 
-        .logo {
+        .main-header .logo {
+            font-family: var(--font-primary);
             font-size: 1.5rem;
-            font-weight: 800;
+            font-weight: 700;
         }
 
-        .nav-links {
-            display: flex;
-            gap: 30px;
-        }
-
-        .nav-links a {
-            font-size: 0.9rem;
+        .main-nav a {
+            margin-left: 2rem;
             font-weight: 600;
+            transition: color 0.3s ease;
         }
 
-        /* --- Hero Section (Cinematic Video) --- */
-        .hero {
-            position: relative;
+        .main-nav a:hover {
+            color: var(--color-accent);
+        }
+
+        /* 3. SEÇÃO HERO CINEMATOGRÁFICA */
+        #hero {
             height: 100vh;
-            width: 100%;
             display: flex;
-            justify-content: center;
             align-items: center;
+            justify-content: center;
+            text-align: center;
+            position: relative;
             overflow: hidden;
         }
 
-        .video-bg {
+        .video-background {
             position: absolute;
-            top: 0;
-            left: 0;
+            top: 50%;
+            left: 50%;
             width: 100%;
             height: 100%;
             object-fit: cover;
-            z-index: 1;
-            opacity: 0.6; /* Slight dim for text readability */
+            transform: translate(-50%, -50%);
+            z-index: -2;
         }
 
-        .hero-overlay {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(to bottom, rgba(0,0,0,0.2), #0a0a0a);
-            z-index: 2;
-        }
-
-        .hero-content {
-            position: relative;
-            z-index: 3;
-            text-align: center;
-            max-width: 800px;
-            padding: 20px;
-        }
-
-        .hero-title {
-            font-size: 4rem;
-            font-weight: 800;
-            line-height: 1.1;
-            margin-bottom: 20px;
-            clip-path: polygon(0 0, 100% 0, 100% 100%, 0% 100%);
-        }
-
-        .hero-subtitle {
-            font-size: 1.2rem;
-            color: var(--text-muted);
-            margin-bottom: 40px;
-            font-weight: 300;
-        }
-
-        .cta-btn {
-            display: inline-block;
-            padding: 15px 40px;
-            border: 1px solid var(--text-main);
-            color: var(--text-main);
-            font-family: var(--font-display);
-            font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            position: relative;
-            overflow: hidden;
-            background: transparent;
-            cursor: pointer;
-        }
-
-        .cta-btn::before {
+        #hero::after {
             content: '';
             position: absolute;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background: var(--text-main);
-            transform: scaleX(0);
-            transform-origin: right;
-            transition: transform 0.4s ease;
+            background: rgba(0, 0, 0, 0.6); /* Overlay para legibilidade */
             z-index: -1;
         }
 
-        .cta-btn:hover {
-            color: var(--bg-color);
+        .hero-content {
+            max-width: 800px;
         }
 
-        .cta-btn:hover::before {
-            transform: scaleX(1);
-            transform-origin: left;
+        .hero-content h1 {
+            text-transform: uppercase;
+            letter-spacing: 2px;
         }
 
-        /* --- Sections General --- */
-        section {
-            padding: 100px 50px;
-            position: relative;
+        .hero-content p {
+            font-size: 1.2rem;
+            margin: 1rem 0 2rem;
+            color: var(--color-text);
         }
 
-        .section-header {
-            margin-bottom: 60px;
-            text-align: center;
+        .cta-button {
+            display: inline-block;
+            padding: 1rem 2.5rem;
+            border: 2px solid var(--color-primary);
+            border-radius: 50px;
+            font-weight: 700;
+            text-transform: uppercase;
+            transition: background-color 0.3s ease, color 0.3s ease;
         }
 
-        .section-header h2 {
-            font-size: 2.5rem;
-            margin-bottom: 15px;
+        .cta-button:hover {
+            background-color: var(--color-primary);
+            color: var(--color-background);
         }
 
-        /* --- Gallery / Curadoria --- */
-        .gallery-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-            gap: 40px;
-        }
-
-        .product-card {
-            position: relative;
-            height: 500px;
-            overflow: hidden;
+        /* Hamburger menu toggle */
+        .menu-toggle {
+            display: none; /* Hidden by default on desktop */
+            background: none;
+            border: none;
+            font-size: 1.8rem;
+            color: var(--color-primary);
             cursor: pointer;
+            z-index: 1001; /* Ensure it's above other elements */
         }
 
-        .product-media {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transition: transform 0.6s ease;
-        }
-
-        /* Video on Hover Styles */
-        .video-hover {
-            position: absolute;
+        /* Mobile Navigation Overlay */
+        .mobile-nav-overlay {
+            position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
+            background: rgba(0, 0, 0, 0.95); /* Dark overlay */
+            z-index: 999;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            transform: translateX(100%); /* Start off-screen to the right */
+            transition: transform 0.3s ease-in-out;
+        }
+
+        .mobile-nav-overlay.active {
+            transform: translateX(0); /* Slide in */
+        }
+
+        .mobile-nav-overlay .main-nav {
+            display: flex; /* Override desktop nav display: none */
+            flex-direction: column;
+            text-align: center;
+        }
+
+        .mobile-nav-overlay .main-nav a {
+            margin: 1rem 0; /* Vertical spacing for mobile links */
+            font-size: 1.8rem; /* Larger font for mobile */
+            color: var(--color-primary); /* Ensure visibility */
+        }
+
+        .mobile-nav-overlay .close-toggle {
+            position: absolute;
+            top: 1.5rem;
+            right: 2rem;
+            font-size: 2.5rem;
+            color: var(--color-primary);
+        }
+
+        /* Prevent body scroll when mobile menu is open */
+        body.no-scroll {
+            overflow: hidden;
+        }
+
+        /* 3.5. SEÇÃO SOBRE (NOVA) */
+        #sobre {
+            padding-top: 4rem;
+            padding-bottom: 4rem;
+        }
+
+        .about-text {
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .benefits-list {
+            list-style: none;
+            margin-top: 3rem;
+            text-align: left;
+        }
+
+        .benefits-list li {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 1.5rem;
+            background: rgba(255,255,255,0.03);
+            padding: 1.5rem;
+            border-radius: 12px;
+            border: 1px solid rgba(255,255,255,0.05);
+            transition: transform 0.3s ease, border-color 0.3s ease;
+        }
+
+        .benefits-list li:hover {
+            transform: translateY(-5px);
+            border-color: var(--color-accent);
+        }
+
+        .benefits-list i {
+            font-size: 1.8rem;
+            color: var(--color-accent);
+            margin-right: 1.5rem;
+            min-width: 40px;
+        }
+
+        .benefits-list strong {
+            color: var(--color-primary);
+            font-size: 1.2rem;
+            display: block;
+            margin-bottom: 0.5rem;
+        }
+
+        /* 3.8. SEÇÃO PROPAGANDA (NOVA) */
+        #propaganda-shein {
+            background: var(--color-background);
+            padding-top: 0;
+        }
+
+        .propaganda-content {
+            display: flex;
+            align-items: center;
+            gap: 3rem;
+            background: linear-gradient(45deg, #111, #1a1a1a);
+            border-radius: 15px;
+            overflow: hidden;
+            border: 1px solid rgba(255,255,255,0.05);
+        }
+
+        .propaganda-text {
+            flex: 1.2;
+            padding: 4rem;
+        }
+
+        .propaganda-text h2 {
+            text-align: left;
+            margin-bottom: 1.5rem;
+        }
+
+        .propaganda-text .cta-button {
+            margin-top: 2rem;
+            background-color: var(--color-accent);
+            color: var(--color-background);
+            border-color: var(--color-accent);
+        }
+
+        .propaganda-text .cta-button:hover {
+            background-color: transparent;
+            color: var(--color-accent);
+        }
+
+        .propaganda-visual {
+            flex: 1;
+            min-height: 500px; /* Altura fixa para o container da imagem */
+        }
+
+        .propaganda-visual img {
+            width: 100%;
+            height: 100%;
             object-fit: cover;
-            opacity: 0;
-            z-index: 1;
-            transition: opacity 0.4s ease;
         }
 
-        .product-card:hover .video-hover {
-            opacity: 1;
+        /* 3.9. SEÇÃO COMO FUNCIONA (NOVA) */
+        #como-funciona {
+            background-color: #111;
+            text-align: center;
         }
 
-        /* Simulate video on hover by swapping opacity or using JS */
-        .product-card:hover .product-media {
+        .steps-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 3rem;
+            margin-top: 3rem;
+        }
+
+        .step-card {
+            background: var(--color-background);
+            padding: 2.5rem 2rem;
+            border-radius: 12px;
+            border: 1px solid rgba(255,255,255,0.05);
+            transition: transform 0.3s ease;
+            position: relative;
+        }
+
+        .step-card:hover {
+            transform: translateY(-10px);
+            border-color: var(--color-accent);
+        }
+
+        .step-icon {
+            font-size: 3rem;
+            color: var(--color-accent);
+            margin-bottom: 1.5rem;
+            display: inline-block;
+        }
+
+        @media (max-width: 768px) {
+            .outfit-item img { width: 100px; height: 100px; }
+        }
+
+        /* 3.9.5 SEÇÃO LOOKS MONTADOS (NOVA) */
+        .outfit-builder {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+            background: #1a1a1a;
+            padding: 2rem;
+            border-radius: 12px;
+            margin-bottom: 2rem;
+        }
+
+        .outfit-item {
+            text-align: center;
+        }
+
+        .outfit-item img {
+            width: 120px; /* Adjusted for better fit */
+            height: 120px; /* Adjusted for better fit */
+            object-fit: cover;
+            border-radius: 8px;
+            border: 1px solid #333;
+        }
+
+        .outfit-plus, .outfit-equals {
+            font-size: 2rem;
+            color: var(--color-accent);
+            font-weight: bold;
+            margin: 0 0.5rem; /* Add some spacing */
+        }
+
+        @media (max-width: 768px) {
+            .outfit-plus, .outfit-equals { margin: 0.5rem 0; } /* Vertical spacing on mobile */
+        }
+
+        /* 3.9.6 SEÇÃO BLOG (NOVA) */
+        .blog-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .blog-card {
+            background: var(--color-background);
+            border: 1px solid #222;
+            border-radius: 12px;
+            overflow: hidden;
+            transition: transform 0.3s ease;
+        }
+
+        .blog-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--color-accent);
+        }
+
+        .blog-image {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+
+        .blog-content {
+            padding: 1.5rem;
+        }
+
+        .blog-date { color: var(--color-accent); font-size: 0.8rem; margin-bottom: 0.5rem; display: block; }
+
+        /* 4. SEÇÃO DE CURADORIA (PRODUTOS) */
+        #curadoria {
+            background-color: #111;
+        }
+        
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .product-card {
+            background-color: var(--color-background);
+            overflow: hidden;
+            position: relative;
+            cursor: pointer;
+        }
+
+        .product-card img {
+            width: 100%;
+            height: 400px;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .product-card:hover img {
             transform: scale(1.05);
         }
 
         .product-info {
+            padding: 1.5rem;
+        }
+
+        .product-info h3 {
+            margin-bottom: 0.5rem;
+        }
+
+        .product-info .price {
+            color: var(--color-accent);
+            font-weight: 700;
+        }
+
+        .product-card .buy-button {
             position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 100%;
-            padding: 20px;
-            background: linear-gradient(to top, rgba(0,0,0,0.9), transparent);
-            transform: translateY(20px);
+            bottom: 1.5rem;
+            right: 1.5rem;
+            background-color: var(--color-primary);
+            color: var(--color-background);
+            padding: 0.75rem 1.5rem;
+            border-radius: 30px;
             opacity: 0;
-            transition: all 0.4s ease;
-            z-index: 2; /* Garante que o texto fique acima do vídeo */
+            transform: translateY(10px);
+            transition: all 0.3s ease;
         }
 
-        .product-card:hover .product-info {
-            transform: translateY(0);
+        .product-card:hover .buy-button {
             opacity: 1;
+            transform: translateY(0);
         }
 
-        /* --- Testimonials / Social Proof --- */
-        .testimonials {
+        /* 5. SEÇÃO DE CUPONS (PRIVILÉGIOS) */
+        .coupon-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+            justify-content: center;
+        }
+
+        .coupon-card {
+            background: #1a1a1a;
+            padding: 2rem;
+            text-align: center;
+            border: 1px solid #333;
+            border-radius: 8px;
+        }
+
+        .coupon-card h3 {
+            color: var(--color-accent);
+            font-size: 2rem;
+            letter-spacing: 2px;
+            margin-bottom: 1rem;
+        }
+
+        .copy-button {
+            background: var(--color-accent);
+            color: var(--color-background);
+            border: none;
+            padding: 0.8rem 2rem;
+            cursor: pointer;
+            font-weight: 700;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+            margin-top: 1.5rem;
+        }
+
+        .copy-button:hover {
+            background-color: #f0c954;
+        }
+        
+        .copy-button.copied {
+            background-color: #28a745; /* Verde para sucesso */
+            color: white;
+        }
+
+        /* 5.5 SEÇÃO AVALIAÇÕES VISUAIS (NOVA) */
+        .client-gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+        .client-photo {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+            border-radius: 8px;
+        }
+
+        /* 6. SEÇÃO DEPOIMENTOS (PROVA SOCIAL) */
+        #depoimentos {
             background-color: #111;
         }
 
-        .testimonial-slider {
+        .counters {
             display: flex;
-            gap: 30px;
-            overflow-x: auto;
-            padding-bottom: 40px;
-            scrollbar-width: none; /* Hide scrollbar Firefox */
+            justify-content: space-around;
+            text-align: center;
+            margin-bottom: 4rem;
         }
-        .testimonial-slider::-webkit-scrollbar { display: none; } /* Hide Chrome */
+
+        .counter-item h3 {
+            font-size: 3rem;
+            color: var(--color-accent);
+        }
 
         .testimonial-card {
-            min-width: 350px;
-            background: #1a1a1a;
-            padding: 30px;
-            border-left: 3px solid var(--accent);
+            background: var(--color-background);
+            padding: 2rem;
+            border-radius: 8px;
             display: flex;
             flex-direction: column;
-            gap: 20px;
-        }
-
-        .user-profile {
-            display: flex;
             align-items: center;
-            gap: 15px;
-        }
-
-        .user-img {
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
-            background-color: #333;
-            object-fit: cover;
-        }
-
-        .quote {
-            font-style: italic;
-            color: var(--text-muted);
-            line-height: 1.6;
-        }
-
-        /* --- Exclusive Coupons --- */
-        .coupons {
             text-align: center;
-            border-top: 1px solid #333;
+            height: auto; /* Ajuste para Swiper */
         }
 
-        .coupon-box {
-            display: inline-flex;
+        .testimonial-card img {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-bottom: 1rem;
+        }
+
+        .testimonial-card blockquote {
+            font-style: italic;
+            margin-bottom: 1rem;
+            color: var(--color-secondary);
+            border: none;
+        }
+
+        .testimonial-card cite {
+            font-weight: 700;
+            color: var(--color-primary);
+        }
+
+        /* Estilos para o Swiper (Carrossel de Depoimentos) */
+        .testimonial-slider {
+            width: 100%;
+            padding-top: 50px;
+            padding-bottom: 50px;
+        }
+
+        .swiper-slide {
+            display: flex;
+            justify-content: center;
             align-items: center;
-            background: #222;
-            padding: 20px 40px;
-            border: 1px dashed var(--accent);
-            margin-top: 30px;
+        }
+
+        .swiper-pagination-bullet {
+            background: var(--color-secondary);
+        }
+
+        .swiper-pagination-bullet-active {
+            background: var(--color-accent);
+        }
+
+        .swiper-button-next,
+        .swiper-button-prev {
+            color: var(--color-accent);
+        }
+
+        /* 7. SEÇÃO FAQ */
+        #faq {
+            background-color: var(--color-background);
+        }
+
+        .faq-accordion {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .faq-item {
+            border-bottom: 1px solid #222;
+        }
+
+        .faq-question {
+            width: 100%;
+            background: none;
+            border: none;
+            text-align: left;
+            padding: 1.5rem 1rem;
+            font-family: var(--font-primary);
+            font-size: 1.2rem;
+            color: var(--color-primary);
             cursor: pointer;
             position: relative;
-            overflow: hidden;
+            padding-right: 2.5rem; /* Espaço para o ícone */
         }
 
-        .coupon-code {
+        .faq-question::after {
+            content: '\2b'; /* Plus icon */
+            position: absolute;
+            right: 1rem;
             font-size: 1.5rem;
-            font-family: var(--font-display);
-            letter-spacing: 3px;
-            margin-right: 20px;
+            transition: transform 0.3s ease;
         }
 
-        /* --- Responsive --- */
-        @media (max-width: 768px) {
-            .hero-title { font-size: 2.5rem; }
-            nav { padding: 20px; }
-            .nav-links { display: none; } /* Simple hiding for demo */
-            section { padding: 60px 20px; }
+        .faq-item.active .faq-question::after {
+            transform: rotate(45deg); /* Transforma em 'x' */
         }
+
+        .faq-answer {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.5s ease-out;
+            padding: 0 1rem;
+        }
+
+        /* 7.5 SEÇÃO CTA INSTAGRAM (NOVA) */
+        #instagram-cta {
+            background: linear-gradient(45deg, rgba(212, 175, 55, 0.1), rgba(212, 175, 55, 0.05));
+            border: 1px solid var(--color-accent);
+            border-radius: 15px;
+            text-align: center;
+        }
+
+        #instagram-cta h2 {
+            margin-bottom: 1rem;
+        }
+
+        #instagram-cta p {
+            max-width: 600px;
+            margin: 0 auto 2rem auto;
+        }
+
+        #instagram-cta .cta-button {
+            background: var(--color-accent);
+            color: var(--color-background);
+            border-color: var(--color-accent);
+        }
+
+        /* 7. FOOTER */
+        .main-footer {
+            text-align: center;
+            padding: 3rem 2rem;
+            border-top: 1px solid #222;
+        }
+        
+        .social-links a {
+            font-size: 1.5rem;
+            margin: 0 1rem;
+            color: var(--color-secondary);
+            transition: color 0.3s ease;
+        }
+
+        .social-links a:hover {
+            color: var(--color-primary);
+        }
+
+        .main-footer p {
+            margin-top: 1.5rem;
+            font-size: 0.9rem;
+        }
+
+        /* 8. RESPONSIVIDADE */
+        @media (max-width: 768px) {
+            h1 { font-size: 2.5rem; }
+            h2 { font-size: 2rem; }
+            .container { padding: 4rem 1rem; }
+            .main-header { padding: 1rem 1.5rem; } /* Adjusted padding */
+            .main-nav#main-nav-desktop { display: none; } /* Hide desktop nav specifically */
+            .counters { flex-direction: column; gap: 2rem; }
+        }
+        
+        /* Responsividade para a seção de propaganda */
+        @media (max-width: 992px) {
+            .propaganda-content {
+                flex-direction: column;
+            }
+            .propaganda-visual {
+                width: 100%;
+                min-height: 300px;
+                order: -1; /* Imagem vem primeiro no mobile */
+            }
+            .propaganda-text {
+                padding: 2.5rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            /* Adjust grid layouts for smaller screens */
+            .steps-grid,
+            .product-grid,
+            .blog-grid,
+            .coupon-grid,
+            .client-gallery {
+                grid-template-columns: 1fr; /* Single column layout */
+                gap: 1.5rem;
+            }
+
+            .outfit-builder {
+                flex-direction: column;
+                padding: 1.5rem;
+            }
+            .outfit-item div { /* For the total price box */
+                width: 120px; /* Match image size */
+                height: 120px; /* Match image size */
+            }
+        }
+
     </style>
 </head>
 <body>
 
-    <!-- Navigation -->
-    <nav>
-        <div class="logo">@GAN.FICIAK</div>
-        <div class="nav-links">
-            <a href="#home">Home</a>
-            <a href="#collection">Curadoria</a>
-            <a href="#testimonials">Depoimentos</a>
-            <a href="#exclusive">VIP</a>
-        </div>
-    </nav>
-
-    <!-- Hero Section -->
-    <header class="hero" id="home">
-        <!-- 
-            NOTE: For production, replace src with your optimized .mp4 / .webm file.
-            Using a poster image for fallback.
-        -->
-        <video class="video-bg" autoplay muted loop playsinline poster="https://images.unsplash.com/photo-1490481651871-32d2e7cd4c48?q=80&w=2000&auto=format&fit=crop">
-            <!-- Vídeo de Moda Fashion (Desfile/Caminhada) -->
-            <source src="https://videos.pexels.com/video-files/3205807/3205807-hd_1920_1080_25fps.mp4" type="video/mp4">
-            Your browser does not support the video tag.
-        </video>
-        
-        <div class="hero-overlay"></div>
-
-        <div class="hero-content">
-            <h1 class="hero-title">Estilo que<br>Conta Histórias</h1>
-            <p class="hero-subtitle">Curadoria exclusiva Shein por @gan.ficiak</p>
-            <a href="#collection" class="cta-btn">Explorar Coleção</a>
+    <header class="main-header">
+        <div class="logo">@gan.ficiak</div>
+        <button class="menu-toggle" aria-label="Abrir menu">
+            <i class="fas fa-bars"></i>
+        </button>
+        <nav class="main-nav" id="main-nav-desktop">
+            <a href="#sobre">Sobre</a>
+            <a href="#novidades">Novidades</a>
+            <a href="#looks">Looks</a>
+            <a href="#cupons">Privilégios</a>
+            <a href="#blog">Blog</a>
+            <a href="#depoimentos">Comunidade</a>
+            <a href="#faq">FAQ</a>
+        </nav>
+        <!-- Mobile Navigation Overlay -->
+        <div class="mobile-nav-overlay" id="mobile-nav-overlay">
+            <button class="menu-toggle close-toggle" aria-label="Fechar menu">
+                <i class="fas fa-times"></i>
+            </button>
+            <nav class="main-nav"> <!-- This nav will be styled for mobile -->
+                <a href="#sobre">Sobre</a>
+                <a href="#novidades">Novidades</a>
+                <a href="#looks">Looks</a>
+                <a href="#cupons">Privilégios</a>
+                <a href="#blog">Blog</a>
+                <a href="#depoimentos">Comunidade</a>
+                <a href="#faq">FAQ</a>
+            </nav>
         </div>
     </header>
 
-    <!-- Curated Collection -->
-    <section id="collection">
-        <div class="section-header">
-            <h2 class="gs-reveal">Showroom Digital</h2>
-            <p class="gs-reveal">Peças selecionadas para elevar sua presença.</p>
-            <p style="font-size: 0.8rem; color: #666; margin-top: 5px;">(Passe o mouse para ver os detalhes em vídeo)</p>
-        </div>
+    <main>
+        <!-- 5.1. PÁGINA INICIAL (HERO) -->
+        <section id="hero">
+            <video class="video-background" autoplay muted loop playsinline poster="https://via.placeholder.com/1920x1080/000000/FFFFFF?text=Loading...">
+                <!-- Vídeo de Pexels - Use um vídeo de moda otimizado para web -->
+                <source src="https://video-previews.elements.envatousercontent.com/files/a1d1f67b-42f1-4980-a064-7a2e6269856e/video_preview_h264.mp4" type="video/mp4">
+                Seu navegador não suporta vídeos HTML5.
+            </video>
+            <div class="hero-content">
+                <h1>Estilo Cinematográfico</h1>
+                <p>Uma curadoria de moda que inspira e transforma. Descubra looks incríveis com a mesma qualidade de uma produção de luxo.</p>
+                <a href="#curadoria" class="cta-button">Explore a Coleção</a>
+            </div>
+        </section>
 
-        <div class="gallery-grid">
-            <!-- Product 1 -->
-            <div class="product-card gs-card" onmouseenter="playVideo(this)" onmouseleave="pauseVideo(this)">
-                <img src="https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?q=80&w=800&auto=format&fit=crop" class="product-media" alt="Vestido Shein">
-                <!-- Vídeo do Produto 1 -->
-                <video class="video-hover" src="https://videos.pexels.com/video-files/4937326/4937326-hd_1080_1920_30fps.mp4" muted loop playsinline></video>
-                <div class="product-info">
-                    <h3>Vestido Satin Luxe</h3>
-                    <p>SHEIN ID: 123456</p>
+        <!-- 5.1.5 SEÇÃO SOBRE -->
+        <section id="sobre" class="container">
+            <h2 class="section-title">Por que @gan.ficiak?</h2>
+            <div class="about-text">
+                <p>Transforme sua experiência de compra na Shein. Não é apenas sobre roupas, é sobre encontrar as peças certas que valorizam seu estilo sem pesar no bolso.</p>
+                <ul class="benefits-list">
+                    <li>
+                        <i class="fa-solid fa-gem"></i>
+                        <div>
+                            <strong>Curadoria de Luxo</strong>
+                            Selecionamos apenas as "joias escondidas" da Shein: peças com tecidos premium, acabamento impecável e avaliações 5 estrelas.
+                        </div>
+                    </li>
+                    <li>
+                        <i class="fa-solid fa-tags"></i>
+                        <div>
+                            <strong>Economia Inteligente</strong>
+                            Acesso direto aos códigos de cupom secretos e estratégias para combinar promoções e pagar o menor preço possível.
+                        </div>
+                    </li>
+                    <li>
+                        <i class="fa-solid fa-wand-magic-sparkles"></i>
+                        <div>
+                            <strong>Styling Descomplicado</strong>
+                            Inspirações reais de como combinar peças acessíveis para criar looks sofisticados que parecem custar 10x mais.
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- NOVA SEÇÃO DE PROPAGANDA -->
+        <section id="propaganda-shein" class="container">
+            <div class="propaganda-content">
+                <div class="propaganda-text">
+                    <h2>Sua Melhor Compra na Shein Começa Aqui</h2>
+                    <p>Usar a Shein com a curadoria da @gan.ficiak é garantir que cada centavo do seu investimento em moda valha a pena. Evite peças de baixa qualidade e descubra itens incríveis que ninguém mais encontrou.</p>
+                    <a href="#curadoria" class="cta-button">Ver Achadinhos Agora</a>
+                </div>
+                <div class="propaganda-visual">
+                    <img src="https://images.pexels.com/photos/794062/pexels-photo-794062.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="Mulher feliz com suas compras de moda">
                 </div>
             </div>
-            <!-- Product 2 -->
-            <div class="product-card gs-card" onmouseenter="playVideo(this)" onmouseleave="pauseVideo(this)">
-                <img src="https://images.unsplash.com/photo-1539008835657-9e8e9680c956?q=80&w=800&auto=format&fit=crop" class="product-media" alt="Look Urbano">
-                <!-- Vídeo do Produto 2 -->
-                <video class="video-hover" src="https://videos.pexels.com/video-files/6312492/6312492-hd_1080_1920_25fps.mp4" muted loop playsinline></video>
-                <div class="product-info">
-                    <h3>Velvet Blazer</h3>
-                    <p>SHEIN ID: 987654</p>
+        </section>
+
+        <!-- 3.9 SEÇÃO COMO FUNCIONA -->
+        <section id="como-funciona" class="container">
+            <h2 class="section-title">Como Funciona</h2>
+            <div class="steps-grid">
+                <div class="step-card">
+                    <i class="fa-solid fa-shirt step-icon"></i>
+                    <h3>1. Escolha o Look</h3>
+                    <p>Navegue pela nossa curadoria exclusiva e encontre as peças que combinam perfeitamente com seu estilo.</p>
+                </div>
+                <div class="step-card">
+                    <i class="fa-solid fa-ticket step-icon"></i>
+                    <h3>2. Pegue o Cupom</h3>
+                    <p>Copie os códigos promocionais disponíveis na seção de Privilégios para garantir descontos extras.</p>
+                </div>
+                <div class="step-card">
+                    <i class="fa-solid fa-bag-shopping step-icon"></i>
+                    <h3>3. Finalize na Shein</h3>
+                    <p>Clique em "Comprar" e finalize seu pedido diretamente no site ou app seguro da Shein.</p>
                 </div>
             </div>
-            <!-- Product 3 -->
-            <div class="product-card gs-card" onmouseenter="playVideo(this)" onmouseleave="pauseVideo(this)">
-                <img src="https://images.unsplash.com/photo-1550614000-4b9519e0233e?q=80&w=800&auto=format&fit=crop" class="product-media" alt="Acessórios">
-                <!-- Vídeo do Produto 3 -->
-                <video class="video-hover" src="https://videos.pexels.com/video-files/7653696/7653696-hd_1080_1920_25fps.mp4" muted loop playsinline></video>
-                <div class="product-info">
-                    <h3>Conjunto Minimalist</h3>
-                    <p>SHEIN ID: 567890</p>
+        </section>
+
+        <!-- 4.0 SEÇÃO NOVIDADES DA SEMANA -->
+        <section id="novidades" class="container">
+            <h2 class="section-title">Novidades da Semana <span style="font-size: 0.5em; vertical-align: middle; background: var(--color-accent); color: #000; padding: 2px 8px; border-radius: 4px;">HOT</span></h2>
+            <div class="product-grid">
+                <div class="product-card">
+                    <img src="https://images.pexels.com/photos/1055691/pexels-photo-1055691.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="Novidade 1">
+                    <div class="product-info">
+                        <h3>Conjunto Verão 2024</h3>
+                        <p class="price">R$ 89,90</p>
+                    </div>
+                    <a href="#" class="buy-button">Ver Detalhes</a>
+                </div>
+                <div class="product-card">
+                    <img src="https://images.pexels.com/photos/1536619/pexels-photo-1536619.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="Novidade 2">
+                    <div class="product-info">
+                        <h3>Vestido Festa Glow</h3>
+                        <p class="price">R$ 199,90</p>
+                    </div>
+                    <a href="#" class="buy-button">Ver Detalhes</a>
+                </div>
+                <div class="product-card">
+                    <img src="https://images.pexels.com/photos/1126993/pexels-photo-1126993.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="Novidade 3">
+                    <div class="product-info">
+                        <h3>Saia Midi Satin</h3>
+                        <p class="price">R$ 79,90</p>
+                    </div>
+                    <a href="#" class="buy-button">Ver Detalhes</a>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
 
-    <!-- Testimonials Section -->
-    <section class="testimonials" id="testimonials">
-        <div class="section-header">
-            <h2 class="gs-reveal">Vozes do Estilo</h2>
-            <p class="gs-reveal">Quem usa, ama e compartilha.</p>
-        </div>
-
-        <div class="testimonial-slider gs-slider-anim">
-            <!-- Testimonial 1 -->
-            <div class="testimonial-card">
-                <div class="user-profile">
-                    <img src="https://randomuser.me/api/portraits/women/44.jpg" alt="User" class="user-img">
-                    <div>
-                        <h4>@mari.style</h4>
-                        <small>Seguidora</small>
+        <!-- 4.1 SEÇÃO LOOKS MONTADOS (MIX & MATCH) -->
+        <section id="looks" class="container" style="background-color: #0f0f0f;">
+            <h2 class="section-title">Fórmula do Look Perfeito</h2>
+            <p style="text-align: center; margin-bottom: 2rem;">Combinações prontas para você não perder tempo pensando no que vestir.</p>
+            
+            <div class="outfit-builder">
+                <div class="outfit-item">
+                    <img src="https://images.pexels.com/photos/1346187/pexels-photo-1346187.jpeg?auto=compress&cs=tinysrgb&w=400" alt="Top Cropped Básico">
+                    <p>Cropped</p>
+                </div>
+                <div class="outfit-plus">+</div>
+                <div class="outfit-item">
+                    <img src="https://images.pexels.com/photos/2388245/pexels-photo-2388245.jpeg?auto=compress&cs=tinysrgb&w=400" alt="Bottom">
+                    <p>Calça Alfaiataria</p>
+                </div>
+                <div class="outfit-plus">+</div>
+                <div class="outfit-item">
+                    <img src="https://images.pexels.com/photos/267301/pexels-photo-267301.jpeg?auto=compress&cs=tinysrgb&w=400" alt="Shoes">
+                    <p>Scarpin Nude</p>
+                </div>
+                <div class="outfit-equals">=</div>
+                <div class="outfit-item">
+                    <div style="width: 120px; height: 120px; background: #333; display: flex; align-items: center; justify-content: center; border-radius: 8px; flex-direction: column;">
+                        <span style="font-size: 1.1rem; font-weight: bold; color: var(--color-accent);">R$ 250,00</span>
+                        <span style="font-size: 0.8rem;">Look Completo</span>
                     </div>
                 </div>
-                <p class="quote">"A curadoria da @gan.ficiak mudou meu guarda-roupa. As peças da Shein que ela indica têm qualidade real!"</p>
             </div>
-            <!-- Testimonial 2 -->
-            <div class="testimonial-card">
-                <div class="user-profile">
-                    <img src="https://randomuser.me/api/portraits/women/65.jpg" alt="User" class="user-img">
-                    <div>
-                        <h4>@julia.fashion</h4>
-                        <small>Inner Circle</small>
+        </section>
+
+        <!-- 5.2. GALERIA DE CURADORIA -->
+        <section id="curadoria" class="container">
+            <h2 class="section-title">Showroom de Moda Dinâmico</h2>
+            <div class="product-grid">
+                <!-- Produto 1 -->
+                <div class="product-card">
+                    <img src="https://images.pexels.com/photos/981619/pexels-photo-981619.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="Look 1">
+                    <div class="product-info">
+                        <h3>Blazer Alongado Bege</h3>
+                        <p class="price">R$ 189,90</p>
+                    </div>
+                    <a href="#" class="buy-button" target="_blank">Comprar na Shein</a>
+                </div>
+                <!-- Produto 2 -->
+                <div class="product-card">
+                    <img src="https://images.pexels.com/photos/1926769/pexels-photo-1926769.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="Look 2">
+                    <div class="product-info">
+                        <h3>Vestido Floral Midi</h3>
+                        <p class="price">R$ 149,90</p>
+                    </div>
+                    <a href="#" class="buy-button" target="_blank">Comprar na Shein</a>
+                </div>
+                <!-- Produto 3 -->
+                <div class="product-card">
+                    <img src="https://images.pexels.com/photos/2043590/pexels-photo-2043590.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="Look 3">
+                    <div class="product-info">
+                        <h3>Calça Jeans Wide Leg</h3>
+                        <p class="price">R$ 129,90</p>
+                    </div>
+                    <a href="#" class="buy-button" target="_blank">Comprar na Shein</a>
+                </div>
+                 <!-- Adicione mais produtos conforme necessário -->
+            </div>
+        </section>
+
+        <!-- 5.3. PRIVILÉGIOS EXCLUSIVOS (CUPONS) -->
+        <section id="cupons" class="container">
+            <h2 class="section-title">Acesso VIP Animado</h2>
+            <div class="coupon-grid">
+                <div class="coupon-card">
+                    <p>15% OFF em todo o site</p>
+                    <h3>GANFICIAK15</h3>
+                    <button class="copy-button" data-coupon="GANFICIAK15">
+                        <i class="fa-regular fa-copy"></i> Copiar Cupom
+                    </button>
+                </div>
+                <div class="coupon-card">
+                    <p>Frete Grátis acima de R$50</p>
+                    <h3>FRETEGAN</h3>
+                    <button class="copy-button" data-coupon="FRETEGAN">
+                        <i class="fa-regular fa-copy"></i> Copiar Cupom
+                    </button>
+                </div>
+                <div class="coupon-card" style="border-color: var(--color-accent);">
+                    <p style="color: var(--color-accent); font-weight: bold;">🔥 CUPOM RELÂMPAGO</p>
+                    <h3>SHEINBR20</h3>
+                    <p style="font-size: 0.9rem; margin-top: 0.5rem;">Válido apenas por 24h</p>
+                    <button class="copy-button" data-coupon="SHEINBR20">
+                        <i class="fa-regular fa-copy"></i> Copiar Cupom
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- 5.6. DEPOIMENTOS E PROVA SOCIAL -->
+        <section id="depoimentos" class="container">
+            <h2 class="section-title">Vozes do Estilo</h2>
+            <div class="counters">
+                <div class="counter-item">
+                    <h3 class="count-up" data-to="1200">0</h3>
+                    <p>Achadinhos Compartilhados</p>
+                </div>
+                <div class="counter-item">
+                    <h3 class="count-up" data-to="850">0</h3>
+                    <p>Seguidoras Satisfeitas</p>
+                </div>
+                <div class="counter-item">
+                    <h3 class="count-up" data-to="3000">0</h3>
+                    <p>Looks Inspirados</p>
+                </div>
+            </div>
+
+            <!-- Carrossel de Depoimentos -->
+            <div class="swiper-container testimonial-slider">
+                <div class="swiper-wrapper">
+                    <div class="swiper-slide">
+                        <div class="testimonial-card">
+                            <img src="https://images.pexels.com/photos/774909/pexels-photo-774909.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="Foto de cliente">
+                            <blockquote>"As dicas da Gabi são incríveis! Montei um look para uma festa e recebi muitos elogios. Me senti super confiante!"</blockquote>
+                            <cite>@marina.santos</cite>
+                        </div>
+                    </div>
+                    <div class="swiper-slide">
+                        <div class="testimonial-card">
+                            <img src="https://images.pexels.com/photos/1239291/pexels-photo-1239291.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="Foto de cliente">
+                            <blockquote>"Nunca pensei que conseguiria me vestir tão bem gastando pouco. A curadoria é impecável e super estilosa."</blockquote>
+                            <cite>@carla_mendes</cite>
+                        </div>
+                    </div>
+                    <div class="swiper-slide">
+                        <div class="testimonial-card">
+                            <img src="https://images.pexels.com/photos/1036623/pexels-photo-1036623.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="Foto de cliente">
+                            <blockquote>"Finalmente encontrei uma influencer que entende meu estilo. Os achadinhos são de ótima qualidade e o preço é justo."</blockquote>
+                            <cite>@julia.oliveira</cite>
+                        </div>
                     </div>
                 </div>
-                <p class="quote">"Os vídeos de caimento ajudam demais a não errar no tamanho. Confiança total."</p>
+                <!-- Paginação -->
+                <div class="swiper-pagination"></div>
+                <!-- Setas de Navegação -->
+                <div class="swiper-button-next"></div>
+                <div class="swiper-button-prev"></div>
             </div>
-            <!-- Testimonial 3 -->
-            <div class="testimonial-card">
-                <div class="user-profile">
-                    <img src="https://randomuser.me/api/portraits/women/33.jpg" alt="User" class="user-img">
-                    <div>
-                        <h4>@ana.trends</h4>
-                        <small>Seguidora</small>
+
+            <!-- Galeria de Fotos de Clientes -->
+            <h3 style="text-align: center; margin-top: 4rem; margin-bottom: 2rem; color: white;">Elas Usam @gan.ficiak</h3>
+            <div class="client-gallery">
+                <img src="https://images.pexels.com/photos/1570868/pexels-photo-1570868.jpeg?auto=compress&cs=tinysrgb&w=400" class="client-photo" alt="Cliente 1">
+                <img src="https://images.pexels.com/photos/2043590/pexels-photo-2043590.jpeg?auto=compress&cs=tinysrgb&w=400" class="client-photo" alt="Cliente 2">
+                <img src="https://images.pexels.com/photos/1852382/pexels-photo-1852382.jpeg?auto=compress&cs=tinysrgb&w=400" class="client-photo" alt="Cliente 3">
+                <img src="https://images.pexels.com/photos/1152994/pexels-photo-1152994.jpeg?auto=compress&cs=tinysrgb&w=400" class="client-photo" alt="Cliente 4">
+            </div>
+        </section>
+
+        <!-- 6.5 SEÇÃO BLOG DE MODA -->
+        <section id="blog" class="container">
+            <h2 class="section-title">Dicas & Tendências</h2>
+            <div class="blog-grid">
+                <article class="blog-card">
+                    <img src="https://images.pexels.com/photos/2983464/pexels-photo-2983464.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="Blog 1" class="blog-image">
+                    <div class="blog-content">
+                        <span class="blog-date">24 Out 2023</span>
+                        <h3>Como não ser taxada na Shein?</h3>
+                        <p>Descubra as regras atualizadas e dicas práticas para fazer suas compras internacionais com segurança.</p>
+                        <a href="#" style="color: var(--color-accent); margin-top: 1rem; display: inline-block;">Ler mais &rarr;</a>
+                    </div>
+                </article>
+                <article class="blog-card">
+                    <img src="https://images.pexels.com/photos/135620/pexels-photo-135620.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="Blog 2" class="blog-image">
+                    <div class="blog-content">
+                        <span class="blog-date">18 Out 2023</span>
+                        <h3>5 Tecidos que parecem caros</h3>
+                        <p>Aprenda a identificar pela foto quais materiais têm caimento de loja de grife e quais evitar.</p>
+                        <a href="#" style="color: var(--color-accent); margin-top: 1rem; display: inline-block;">Ler mais &rarr;</a>
+                    </div>
+                </article>
+            </div>
+        </section>
+
+        <!-- 7.5 SEÇÃO CTA INSTAGRAM -->
+        <section id="instagram-cta" class="container">
+            <h2>Quer Achadinhos em Tempo Real?</h2>
+            <p>As melhores promoções e os looks mais recentes chegam primeiro no Instagram. Siga para não perder nada!</p>
+            <a href="https://www.instagram.com/gan.ficiak" target="_blank" class="cta-button">
+                <i class="fab fa-instagram"></i> Seguir @gan.ficiak
+            </a>
+        </section>
+
+        <!-- 5.7. SEÇÃO FAQ -->
+        <section id="faq" class="container">
+            <h2 class="section-title">Perguntas Frequentes</h2>
+            <div class="faq-accordion">
+                <div class="faq-item">
+                    <button class="faq-question">Como funcionam os cupons de desconto?</button>
+                    <div class="faq-answer">
+                        <p>Os cupons fornecidos pela @gan.ficiak são códigos especiais que você insere no checkout da Shein. Eles podem dar descontos percentuais, valores fixos ou frete grátis. Fique atenta às regras de cada cupom, como valor mínimo de compra.</p>
                     </div>
                 </div>
-                <p class="quote">"Peguei o cupom VIP e comprei o look completo do último vídeo. Chegou perfeito!"</p>
+                <div class="faq-item">
+                    <button class="faq-question">As peças indicadas são realmente de boa qualidade?</button>
+                    <div class="faq-answer">
+                        <p>Sim! A curadoria da @gan.ficiak é focada em encontrar peças com tecidos de qualidade, bom caimento e, principalmente, com avaliações positivas de outras compradoras. A ideia é garimpar os "tesouros" da Shein, evitando itens de baixa qualidade.</p>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <button class="faq-question">Preciso pagar algo para ter acesso às dicas e cupons?</button>
+                    <div class="faq-answer">
+                        <p>Não! Todo o conteúdo, dicas, curadoria e cupons compartilhados pela @gan.ficiak são totalmente gratuitos. O objetivo é criar uma comunidade e ajudar todas a se vestirem bem, economizando.</p>
+                    </div>
+                </div>
             </div>
-        </div>
-    </section>
+        </section>
 
-    <!-- Exclusive Coupons -->
-    <section class="coupons" id="exclusive">
-        <div class="section-header">
-            <h2 class="gs-reveal">Acesso VIP</h2>
-        </div>
-        <div class="coupon-box gs-scale">
-            <span class="coupon-code">GANFICIAK15</span>
-            <button class="cta-btn" onclick="copyCoupon(this)">Copiar</button>
-        </div>
-        <p style="margin-top: 20px; color: var(--text-muted); font-size: 0.8rem;">15% OFF em compras acima de R$100</p>
-    </section>
+    </main>
 
-    <footer>
-        <div style="text-align: center; padding: 40px; border-top: 1px solid #222;">
-            <p>&copy; 2023 @gan.ficiak. Affiliate Partner Shein.</p>
+    <footer class="main-footer">
+        <div class="social-links">
+            <a href="#" target="_blank"><i class="fab fa-instagram"></i></a>
+            <a href="#" target="_blank"><i class="fab fa-tiktok"></i></a>
+            <a href="#" target="_blank"><i class="fab fa-whatsapp"></i></a>
         </div>
+        <p>&copy; 2024 | gan.ficiak | Desenvolvido com uma estética cinematográfica.</p>
     </footer>
 
-    <!-- GSAP Scripting -->
+    <!-- GSAP (GreenSock Animation Platform) + ScrollTrigger Plugin -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+    <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+
     <script>
-        // Register ScrollTrigger
+        // Registrar o plugin ScrollTrigger
         gsap.registerPlugin(ScrollTrigger);
 
-        // 1. Hero Animation (Load)
-        const tl = gsap.timeline();
-        tl.from(".hero-title", {
-            y: 100,
-            opacity: 0,
-            duration: 1.2,
-            ease: "power4.out",
-            skewY: 7
-        })
-        .from(".hero-subtitle", {
-            y: 20,
-            opacity: 0,
-            duration: 0.8,
-            ease: "power2.out"
-        }, "-=0.8")
-        .from(".cta-btn", {
-            y: 20,
-            opacity: 0,
-            duration: 0.8,
-            ease: "power2.out"
-        }, "-=0.6");
+        // Espera o DOM carregar completamente
+        document.addEventListener('DOMContentLoaded', () => {
+            // Registrar o plugin ScrollTrigger
+            gsap.registerPlugin(ScrollTrigger);
 
-        // 2. Section Headers Reveal
-        gsap.utils.toArray('.gs-reveal').forEach(element => {
-            gsap.from(element, {
-                scrollTrigger: {
-                    trigger: element,
-                    start: "top 80%",
-                    toggleActions: "play none none reverse"
-                },
-                y: 50,
-                opacity: 0,
+            // --- ANIMAÇÕES ---
+
+            // 1. Animação de entrada do Hero
+            gsap.from('.hero-content > *', {
                 duration: 1,
-                ease: "power3.out"
+                opacity: 0,
+                y: 50,
+                stagger: 0.3,
+                ease: 'power3.out',
+                delay: 0.5
+            });
+
+            // 2. Animação de entrada para títulos das seções
+            gsap.utils.toArray('.section-title').forEach(title => {
+                gsap.from(title, {
+                    duration: 0.8,
+                    opacity: 0,
+                    y: 30,
+                    scrollTrigger: {
+                        trigger: title,
+                        start: 'top 85%',
+                        toggleActions: 'play none none none'
+                    }
+                });
+            });
+
+            // 3. Animação para cards (produtos e depoimentos)
+            gsap.utils.toArray('.product-card, .coupon-card, .faq-item, .propaganda-content, .step-card, .blog-card, .outfit-builder, #instagram-cta, .client-photo').forEach(card => {
+                gsap.from(card, {
+                    duration: 0.8,
+                    opacity: 0,
+                    y: 50,
+                    scale: 0.95,
+                    scrollTrigger: {
+                        trigger: card,
+                        start: 'top 85%',
+                        toggleActions: 'play none none none'
+                    }
+                });
+            });
+
+            // 4. Animação dos contadores
+            gsap.utils.toArray('.count-up').forEach(counter => {
+                const endValue = parseInt(counter.dataset.to);
+                gsap.from(counter, {
+                    textContent: 0,
+                    duration: 2,
+                    ease: 'power1.inOut',
+                    snap: { textContent: 1 },
+                    scrollTrigger: {
+                        trigger: counter,
+                        start: 'top 90%',
+                        toggleActions: 'play none none none'
+                    },
+                    onUpdate: function() {
+                        this.targets()[0].innerHTML = Math.ceil(this.targets()[0].textContent).toLocaleString('pt-BR');
+                    },
+                    onComplete: function() {
+                        this.targets()[0].innerHTML = endValue.toLocaleString('pt-BR');
+                    }
+                });
+            });
+
+            // 5. Inicialização do Carrossel Swiper
+            const swiper = new Swiper('.testimonial-slider', {
+                loop: true,
+                grabCursor: true,
+                spaceBetween: 30,
+                slidesPerView: 1,
+                pagination: {
+                    el: '.swiper-pagination',
+                    clickable: true,
+                },
+                navigation: {
+                    nextEl: '.swiper-button-next',
+                    prevEl: '.swiper-button-prev',
+                },
+                breakpoints: {
+                    768: {
+                        slidesPerView: 2,
+                    },
+                    1024: {
+                        slidesPerView: 1, // Mantém 1 slide visível em telas maiores para focar no depoimento
+                    }
+                }
+            });
+
+            // 6. Funcionalidade do Accordion FAQ
+            const faqItems = document.querySelectorAll('.faq-item');
+            faqItems.forEach(item => {
+                const question = item.querySelector('.faq-question');
+                question.addEventListener('click', () => {
+                    const answer = item.querySelector('.faq-answer');
+                    const isActive = item.classList.toggle('active');
+                    answer.style.maxHeight = isActive ? answer.scrollHeight + "px" : "0";
+                });
+            });
+
+
+            // --- FUNCIONALIDADES ---
+
+            // 5. Funcionalidade de copiar cupom
+            const copyButtons = document.querySelectorAll('.copy-button');
+            copyButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    const couponCode = button.dataset.coupon;
+                    navigator.clipboard.writeText(couponCode).then(() => {
+                        const originalText = button.innerHTML;
+                        button.innerHTML = 'Copiado! <i class="fa-solid fa-check"></i>';
+                        button.classList.add('copied');
+
+                        setTimeout(() => {
+                            button.innerHTML = originalText;
+                            button.classList.remove('copied');
+                        }, 2000);
+                    }).catch(err => {
+                        console.error('Falha ao copiar: ', err);
+                    });
+                });
             });
         });
-
-        // 3. Product Grid Stagger
-        gsap.from(".gs-card", {
-            scrollTrigger: {
-                trigger: ".gallery-grid",
-                start: "top 75%"
-            },
-            y: 100,
-            opacity: 0,
-            duration: 1,
-            stagger: 0.2,
-            ease: "power3.out"
-        });
-
-        // 4. Testimonial Slider slide-in
-        gsap.from(".gs-slider-anim", {
-            scrollTrigger: {
-                trigger: ".testimonials",
-                start: "top 70%"
-            },
-            x: 100,
-            opacity: 0,
-            duration: 1.2,
-            ease: "power2.out"
-        });
-
-        // Simple Copy Coupon Logic
-        function copyCoupon(btn) {
-            const code = btn.previousElementSibling.innerText;
-            navigator.clipboard.writeText(code).then(() => {
-                const originalText = btn.innerText;
-                btn.innerText = "Copiado!";
-                btn.style.backgroundColor = "#d4af37";
-                btn.style.color = "#000";
-                setTimeout(() => {
-                    btn.innerText = originalText;
-                    btn.style.backgroundColor = "transparent";
-                    btn.style.color = "#fff";
-                }, 2000);
-            });
-        }
-
-        // Video Play/Pause Logic for Products
-        function playVideo(card) {
-            const vid = card.querySelector('video');
-            if(vid) vid.play();
-        }
-        function pauseVideo(card) {
-            const vid = card.querySelector('video');
-            if(vid) {
-                vid.pause();
-                vid.currentTime = 0; // Reset to start
-            }
-        }
     </script>
+
 </body>
 </html>
